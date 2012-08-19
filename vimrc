@@ -19,6 +19,11 @@ let g:syntastic_mode_map = {'mode':'active',
                             \'passive_filetypes':[] }
 let g:syntastic_auto_jump=1
 
+"yankring
+let g:yankring_history_dir = '$HOME/.tmp'
+let g:yankring_min_element_length = 2
+let g:yankring_max_display = 70
+
 "latex options
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
@@ -44,14 +49,13 @@ set vb t_vb= 	"Use visual bell instead of beeping
 set autowrite	"Automatically save before commands like :next and :make
 set hidden		"Hide buffers when they are abandoned
 set noswapfile
-
-"Settings for MOVING and SEARCHING
 set mouse=a		"Enable mouse 
 set ignorecase	"Do case insensitive matching
 set smartcase	"Do smart case matching
 set incsearch	"Incremental search
 set showmatch	"Show matching brackets.
 set hlsearch    "Highlight search matches
+set scrolloff=2 "Minimum number of lines to keep above cursor
 
 "TAB settings
 set tabstop=4
@@ -66,7 +70,7 @@ set autoindent
 set smartindent
 
 "make pasting done without any indentation break.
-set pastetoggle=<F3>	
+"set pastetoggle=<F3>	
 
 "jump to the last position when reopening a file
 if has("autocmd")
