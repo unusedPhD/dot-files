@@ -1,5 +1,6 @@
 "pathogen settings
 call pathogen#infect()
+call pathogen#helptags()
 
 "change leader Key
 let mapleader = ","
@@ -20,9 +21,9 @@ let g:syntastic_mode_map = {'mode':'active',
 let g:syntastic_auto_jump=1
 
 "yankring
-let g:yankring_history_dir = '$HOME/.tmp'
+let g:yankring_history_dir = '$HOME/.vim'
 let g:yankring_min_element_length = 2
-let g:yankring_max_display = 70
+let g:yankring_max_display = 100
 
 "latex options
 set grepprg=grep\ -nH\ $*
@@ -94,3 +95,8 @@ set wildignore+=*.orig "Merge resolution files"
 
 "working with split screens, resize split when window is resized
 au VimResized * :wincmd =
+
+"remove help keys
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
