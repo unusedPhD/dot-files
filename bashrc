@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+#linuxlogo -L ubuntu -l
+
 # set defaults
 export EDITOR=vim
 
@@ -91,6 +93,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias h='history | grep $1'
 alias tetris='bastet' 
+alias cdd=". $HOME/Drive/bin/cdd/cdd.sh"
+alias t="$HOME/Drive/bin/todo.txt/todo.sh"
 
 # aliases for git
 alias gs='git status'
@@ -102,6 +106,7 @@ alias go='git checkout '
 alias gk='gitk --all&'
 alias gx='gitx --all'
 alias gh='git hist'
+alias gp='git pull'
 
 # alias for apt
 alias aptsearch='apt-cache search'
@@ -111,7 +116,7 @@ alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'
 alias autoremove='sudo apt-get autoremove'
 alias check='sudo apt-get check'
 alias dist-upgrade='sudo apt-get dist-upgrade'
-alias update='sudo apt-get update && sudo apt-get upgrade'
+alias update='sudo apt-get update && sudo apt-get dist-upgrade'
 
 alias ..='cd ../'
 alias ...='cd ../../'
@@ -130,6 +135,7 @@ alias vi='vim'
 alias wget='wget -c'
 alias slist='sudo vim /etc/apt/sources.list'
 alias ls_functions='grep ^function ~/.bashrc'
+alias shred='shred -n 10 -u -v -z'
 
 # common mispelled commands
 alias xs='cd'
@@ -138,6 +144,7 @@ alias got='git '
 alias get='git '
 alias claer="clear"
 alias clera="clear"
+alias celar="clear"
 alias findgrep='grepfind'
 alias mann='man'
 alias updtae='update'
@@ -157,7 +164,7 @@ fi
 # advanced ls functions
 alias l="clear; ls -1"
 alias la='ls -A'
-alias ll='ls -l'
+alias ll='ls -haltr'
 alias lx='ls -lXB'         # sort by extension
 alias lk='ls -lSr'         # sort by size, biggest last
 alias lc='ls -ltcr'        # sort by and show change time, most recent last
@@ -185,13 +192,13 @@ function ds(){ # Size of directories in MB
     if [ $# -lt 1 ] || [ $# -gt 2 ]; then
         echo "you did not specify a directy, using pwd"
         DIR=$(pwd)
-        find $DIR -maxdepth 1 -type d -exec du -sm \{\} \; | sort -nr
+        find $DIR -maxdepth 1 -type d -exec du -sm \{\} \; | sort -n
     else
-        find $1 -maxdepth 1 -type d -exec du -sm \{\} \; | sort -nr
+        find $1 -maxdepth 1 -type d -exec du -sm \{\} \; | sort -n
     fi
 }
 
-lls() { # Counts files, subdirectories and directory size and displays details about files
+function lls() { # Counts files, subdirectories and directory size and displays details about files
 	echo -n " <`find . -maxdepth 1 -mindepth 1 -type f | wc -l | tr -d '[:space:]'` files>"  # count files
 	echo -n " <`find . -maxdepth 1 -mindepth 1 -type d | wc -l | tr -d '[:space:]'` dirs/>"  # count sub-directories
 	echo -n " <`find . -maxdepth 1 -mindepth 1 -type l | wc -l | tr -d '[:space:]'` links@>" # count links
@@ -268,10 +275,6 @@ function apt-history(){ # show apt log history
 	esac
 }
 
-function top10(){ # top10 history commands
-	history|awk '{a[$2]++}END{for(i in a){printf"%5d\t%s\n",a[i],i}}'|sort -nr|head; 
-}
-
 function stopwatch(){ # keep track of elapsed time
 	BEGIN=$(date +%s)
 	while true; do
@@ -321,24 +324,24 @@ function man2pdf(){ # generates a PDF of manpages
 	fi
 }
 
-function bak(){ # create a backup of the file
+function bk(){ # create a backup of the file
 	cp $1 $1_`date +%Y%m%d%H%M`.backup
 }
 
 function extract(){ # automatically extract archives
 	if [ -f $1 ] ; then
 		case $1 in
-			*.tar.bz2)   tar xvjf $1     ;;
-			*.tar.gz)    tar xvzf $1     ;;
-			*.bz2)       bunzip2 $1      ;;
-			*.rar)       unrar x $1      ;;
-			*.gz)        gunzip $1       ;;
-			*.tar)       tar xvf $1      ;;
-			*.tbz2)      tar xvjf $1     ;;
-			*.tgz)       tar xvzf $1     ;;
-			*.zip)       unzip $1        ;;
-			*.Z)         uncompress $1   ;;
-			*.7z)        7z x $1         ;;
+			*.tar.bz2)   tar xvjf "$1"     ;;
+			*.tar.gz)    tar xvzf "$1"     ;;
+			*.bz2)       bunzip2 "$1"      ;;
+			*.rar)       unrar x "$1"      ;;
+			*.gz)        gunzip "$1"       ;;
+			*.tar)       tar xvf "$1"      ;;
+			*.tbz2)      tar xvjf "$1"     ;;
+			*.tgz)       tar xvzf "$1"     ;;
+			*.zip)       unzip "$1"        ;;
+			*.Z)         uncompress "$1"   ;;
+			*.7z)        7z x "$1"         ;;
 			*)           echo "'$1' cannot be extracted via >extract<" ;;
 		esac
 	else
@@ -346,12 +349,8 @@ function extract(){ # automatically extract archives
 	fi
 }
 
-function compress(){ # create .tar.gz archive
-	tar -cvzf $1 $2 
-}
-
 function tarball(){ # create a dated tar.gz archive
-	name=$1; shift; tar zcvf $name-`date +%Y%m%d`.tar.gz "$@"; 
+	tar zcvf "$1"-`date +%Y%m%d`.tar.gz "$1"; 
 }
 
 function pullout(){ # pull a single file out of a .tar.gz		 
@@ -383,7 +382,6 @@ function encrypt(){ # advanced encryption / decryption
 	decrypt="Decrypt"
 	file_msg="file:"
 	pass_msg="Enter passphrase"
-
 	if [ "$1" != "" ]; then
 		i=1
 		file=`echo "$1" | sed ''$i'!d'`
@@ -458,10 +456,6 @@ function checksum(){ # check file checksum
 	esac
 }
 
-function md5(){ # display MD5 value for file
-	echo -n $@ | md5sum; 
-}
-
 function psls(){ # list process for current user
 	ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command
 }
@@ -501,7 +495,7 @@ function netinfo(){ # netinfo - shows network information for your system
 	/sbin/ifconfig | awk /'Bcast/ {print $3}'
 	/sbin/ifconfig | awk /'inet addr/ {print $4}'
 	/sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
-	myip
+	 myip
 	echo "---------------------------------------------------"
 }
 
@@ -509,12 +503,8 @@ function myip(){
 	curl "ifconfig.me"
 }
 
-function geoip(){ # geoip lookup 
-	#(need geoip database: sudo apt-get install geoip-bin)
-	geoiplookup $1
-}
-
-function geoiplookup(){ # geoip information
+function geoip(){ # geoip information
+	# need geoip database: sudo apt-get install geoip-bin
 	curl -A "Mozilla/5.0" -s "http://www.geody.com/geoip.php?ip=$1" | grep "^IP.*$1" | html2text; 
 }
 
@@ -522,7 +512,7 @@ function findtcp(){ # find an unused unprivileged TCP port
 	(netstat  -atn | awk '{printf "%s\n%s\n", $4, $4}' | grep -oE '[0-9]*$'; seq 32768 61000) | sort -n | uniq -u | head -n 1
 }
 
-function port(){ # Scans a port, returns what's on it.
+function port(){ # scans a port, returns what's on it.
 	lsof -i :"$1"
 }
 
@@ -560,7 +550,7 @@ shopt -s checkwinsize
 # add a line of "---" and the time between each command, recalculated every time the prompt is shown in function prompt_command
 fill="--- "
 
-PS1="\[$NC\]\[$Grey\]"'$fill \t\n'"\[$BIBlue\]\w\[$NC\] \$ "
+PS1="\[$NC\]\[$Grey\]"'$fill \t\n'"\[$BIPurple\]\h \[$BIBlue\]\w\[$NC\] \$ "
 
 # Reset color for command output, invoked every time before a command is executed
 trap 'echo -ne "\033[0m"' DEBUG
@@ -599,4 +589,9 @@ fi
 # source file with all path entries
 if [ -f ~/.bash_path ]; then
 	. ~/.bash_path
+fi
+
+# source file with all bash alias
+if [ -f ~/.bash_alias ]; then
+	. ~/.bash_alias
 fi
