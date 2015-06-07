@@ -50,7 +50,7 @@ set foldlevel=1         "this is just what i use
 "syntastic options
 let g:syntastic_mode_map = 
 \{
-	\'mode':'active',
+    \'mode':'active',
     \'active_filetypes':['perl', 'python', 'ruby', 'c'],
     \'passive_filetypes':[]
 \}
@@ -61,17 +61,13 @@ let g:yankring_history_dir = '$HOME/.cache'
 let g:yankring_min_element_length = 2
 let g:yankring_max_display = 80
 
-"latex options
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-
 "colorscheme
 set background=dark
 syntax enable
 if has('gui_running')
     " GUI colors
     colorscheme Monokai
-	set guioptions=aegimrLt
+    set guioptions=aegimrLt
 else
     " Non-GUI (terminal) colors
     colorscheme literal_tango
@@ -139,7 +135,7 @@ set wildignore+=*.orig                           "Merge resolution files
 
 "jump to the last position when reopening a file
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 "working with split screens, resize split when window is resized
