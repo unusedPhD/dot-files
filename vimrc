@@ -101,12 +101,14 @@ set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
 "TAB settings
+filetype plugin indent on
 set tabstop=4
+set shiftwidth=4
+set expandtab
 
 "autodetect filetype and load indentation rules
 filetype plugin on
 filetype indent on
-set autoindent
 set smartindent
 
 "make pasting done without any indentation break.

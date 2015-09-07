@@ -1,0 +1,12 @@
+[submodule "vim/bundle/vim-webdevicons"]
+	path = vim/bundle/vim-webdevicons
+	url = git@github.com:vim-scripts/vim-webdevicons.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "vim/bundle/YankRing.vim"]
+	path = vim/bundle/YankRing.vim
+	url = git@github.com:vim-scripts/YankRing.vim.git
+[submodule "vim/bundle/vim-yara"]
+	path = vim/bundle/vim-yara
+	url = git@github.com:yaunj/vim-yara.git
