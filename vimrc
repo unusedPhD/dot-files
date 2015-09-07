@@ -12,13 +12,6 @@ nmap <leader>l     :TagbarToggle<cr>
 imap <leader>l     <ESC>:TagbarToggle<cr>i
 nmap <leader>y     :YRShow<cr>
 
-"navigate windows
-"C+w+w jump to next window
-"C+w+j jump to window on left
-"C+w+l jump to window on right
-"C+w+j jump to window below
-"C+w+k jump to window above
-
 "nerd commenter default key bindings
 
 "<leader\>cc			Comment out the current line or text selected in visual mode. 
@@ -69,14 +62,16 @@ if has('gui_running')
     colorscheme Monokai
     set guioptions=aegimrLt
 else
-    " Non-GUI (terminal) colors
-    colorscheme literal_tango
+    "Non-GUI (terminal) colors
+    "colorscheme literal_tango
+    "colorscheme vim-monokai/colors/monokai
+    colorscheme solarized
 endif
-"colorscheme Monokai
-"colorscheme literal_tango
-"colorscheme ir_black
-"colorscheme gentooish
-"colorscheme industrial
+
+"enable 256 colors 
+set t_Co=256
+
+let g:airline_theme = 'solarized'
 
 "Common VIM settings
 set encoding=utf-8
@@ -152,3 +147,12 @@ nmap :Wq :wq
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
+
+"split screen ctrl+arrow navigation
+nmap <silent> <C-Up> :wincmd k<CR>
+nmap <silent> <C-Down> :wincmd j<CR>
+nmap <silent> <C-Left> :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
+
+"navigate tabs
+"ctrl+shift+left/right
