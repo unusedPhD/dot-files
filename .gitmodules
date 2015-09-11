@@ -36,4 +36,4 @@
 	url = git@github.com:unusedPhD/bash-it.git
 [submodule "bin/cdd"]
 	path = bin/cdd
-	url = git@github.com:jestor/cdd.git
+	url = git@github.com:unusedPhD/cdd.git
