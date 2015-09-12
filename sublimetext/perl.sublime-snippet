@@ -1,0 +1,48 @@
+<snippet>
+    <content>#!/usr/bin/perl
+use strict;
+use Archive::Tar;
+use Getopt::Long;
+use Pod::Usage;
+
+my \$version = '${1:version}';
+my \$opt_HELP;
+my \$opt_VERSION;
+
+GetOptions (
+    'h|help'      => \$opt_HELP,
+    'v|version'   => \$opt_VERSION,
+);
+
+if (\$opt_HELP) {
+    pod2usage(-verbose => 1);
+    exit;
+}
+if (\$opt_VERSION) {
+    print "${2:script} version \$version\n";
+    exit;
+}
+
+=head1 NAME
+
+    ${2:script}
+
+=head1 SYNOPSIS
+
+    ${2:script} [options]
+
+=head1 OPTIONS
+
+    -h|--help                   display help message
+    -v|--version                display version details
+
+=head2 AUTHORS
+
+    [Authors]
+
+=cut</content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>perl</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,14 @@
+<snippet>
+    <content>#!/bin/sh
+VERSION='${1:script} version ${2:version}'
+if getopts ":v" opt; then
+    echo \$VERSION;
+    exit 1;
+else    
+    ${3:content}
+fi</content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>bash</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.python</scope> -->
+</snippet>
