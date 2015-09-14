@@ -1,0 +1,18 @@
+{
+	"color_inactive_tabs": true,
+	"color_scheme": "Packages/User/SublimeLinter/Monokai Soda (SL).tmTheme",
+	"font_face": "DejaVu Sans Mono for Powerline",
+	"font_size": 12,
+	"ignored_packages":
+	[
+	],
+	"soda_classic_tabs": false,
+	"soda_folder_icons": true,
+	"status_bar_brighter": true,
+	"tab_size": 4,
+	"tabs_padding_small": true,
+	"tabs_small": true,
+	"theme": "Soda Dark 3.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true
+}
