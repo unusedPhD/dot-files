@@ -49,3 +49,6 @@
 [submodule "sublimetext/Packages/Bro"]
 	path = sublimetext/Packages/Bro
 	url = https://github.com/bro/bro-sublime.git
+[submodule "vim/bundle/cql-vim"]
+	path = vim/bundle/cql-vim
+	url = git@github.com:unusedPhD/cql-vim.git
