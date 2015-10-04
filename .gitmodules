@@ -52,3 +52,6 @@
 [submodule "vim/bundle/cql-vim"]
 	path = vim/bundle/cql-vim
 	url = git@github.com:unusedPhD/cql-vim.git
+[submodule "vim/bundle/vim-multiple-cursors"]
+	path = vim/bundle/vim-multiple-cursors
+	url = git@github.com:unusedPhD/vim-multiple-cursors.git
