@@ -64,14 +64,14 @@ if has('gui_running')
 else
     "Non-GUI (terminal) colors
     "colorscheme literal_tango
-    "colorscheme vim-monokai/colors/monokai
-    colorscheme solarized
+    colorscheme vim-monokai/colors/monokai
+    "colorscheme solarized
 endif
 
 "enable 256 colors 
 set t_Co=256
 
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'powerlineish'
 
 "Common VIM settings
 set encoding=utf-8
@@ -138,6 +138,15 @@ endif
 "working with split screens, resize split when window is resized
 au VimResized * :wincmd =
 
+"split screen ctrl+arrow navigation
+nmap <silent> <C-Up> :wincmd k<CR>
+nmap <silent> <C-Down> :wincmd j<CR>
+nmap <silent> <C-Left> :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
+
+"navigate tabs
+"ctrl+shift+left/right
+
 "typo alias 
 nmap :Q :q 
 nmap :WQ :wq
@@ -148,11 +157,6 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-"split screen ctrl+arrow navigation
-nmap <silent> <C-Up> :wincmd k<CR>
-nmap <silent> <C-Down> :wincmd j<CR>
-nmap <silent> <C-Left> :wincmd h<CR>
-nmap <silent> <C-Right> :wincmd l<CR>
-
-"navigate tabs
-"ctrl+shift+left/right
+" map caplocks to esc
+au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
