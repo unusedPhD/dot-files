@@ -109,6 +109,21 @@ set smartindent
 "make pasting done without any indentation break.
 set pastetoggle=<F3>	
 
+" strip whitespace
+autocmd BufWritePre *.{pl,py,js} :call <SID>StripTrailingWhitespaces()
+
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
 "wildmenu completion 
 set wildmenu
 set wildmode=list:longest
@@ -156,7 +171,3 @@ nmap :Wq :wq
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
-
-" map caplocks to esc
-au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
