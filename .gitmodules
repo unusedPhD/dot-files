@@ -58,3 +58,6 @@
 [submodule "vim/bundle/vim-mkdir"]
 	path = vim/bundle/vim-mkdir
 	url = git@github.com:pbrisbin/vim-mkdir.git
+[submodule "vim/bundle/vim-gitgutter"]
+	path = vim/bundle/vim-gitgutter
+	url = git://github.com/airblade/vim-gitgutter.git
