@@ -17,11 +17,13 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'pbrisbin/vim-mkdir'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
+Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'sickill/vim-monokai'
@@ -30,6 +32,8 @@ Plug 'mephux/bro.vim'
 Plug 'elubow/cql-vim'
 Plug 'yaunj/vim-yara'
 Plug 'unusedPhD/scratch.vim'
+" Plug 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-surround'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

@@ -19,8 +19,8 @@ imap <leader>n     <ESC>:NERDTreeToggle<cr>i
 
 let g:syntastic_mode_map =
 \{
-    \'mode':'active',
-    \'active_filetypes':['perl', 'python', 'go'],
+    \'mode':'passive',
+    \'active_filetypes':['perl', 'python'],
     \'passive_filetypes':[]
 \}
 let g:syntastic_auto_jump=1
@@ -79,11 +79,24 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
-" display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
+" Display unprintable chars
+set list
+set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
+set showbreak=↪
+
+" listchar=trail is not as flexible, use the below to highlight trailing
+" whitespace. Don't do it for unite windows or readonly files
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+augroup MyAutoCmd
+  autocmd BufWinEnter * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+$/ | endif
+  autocmd InsertEnter * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
+  autocmd InsertLeave * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+$/ | endif
+  autocmd BufWinLeave * if &modifiable && &ft!='unite' | call clearmatches() | endif
+augroup END
 
 " strip whitespace
-autocmd BufWritePre *.{pm,pl,py,js} :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.{go,pm,pl,py,js} :call <SID>StripTrailingWhitespaces()
 function! <SID>StripTrailingWhitespaces()
     " save last search, and cursor position.
     let _s=@/
@@ -293,7 +306,7 @@ nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mru file_mru<CR>
 let g:unite_data_directory = "~/.cache/unite"
 
 " Enable short source name in window
-" let g:unite_enable_short_source_names = 1
+"let g:unite_enable_short_source_names = 1
 
 " Enable history yank source
 let g:unite_source_history_yank_enable = 1
