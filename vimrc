@@ -27,6 +27,7 @@ let g:syntastic_auto_jump=1
 
 " display
 set t_Co=256
+
 set background=dark
 "syntax enable
 if has('gui_running')

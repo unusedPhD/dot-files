@@ -1,3 +1,5 @@
+sudo apt-get install git tmux vim-nox
+
 rm ~/.bashrc
 ln -s ~/code/dot-files/bashrc ~/.bashrc
 rm ~/.vimrc
@@ -11,6 +13,7 @@ rm ~/.config/user-dirs.locale
 ln -s ~/code/dot-files/config/user-dirs.dirs ~/.config/user-dirs.dirs
 ln -s ~/code/dot-files/config/user-dirs.locale ~/.config/user-dirs.locale
 
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 
 
