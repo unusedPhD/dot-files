@@ -1,12 +1,6 @@
-let mapleader = ","      "change leader key into a comma insted of a backslash
-set nocompatible         "make vim incompatible with vi
+let mapleader = " "
+set nocompatible
 set history=100
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-    syntax on
-endif
 
 if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
@@ -17,8 +11,7 @@ nmap <leader><tab> :Sscratch<cr>
 nmap <leader>n     :NERDTreeToggle<cr>
 imap <leader>n     <ESC>:NERDTreeToggle<cr>i
 
-let g:syntastic_mode_map =
-\{
+let g:syntastic_mode_map = {
     \'mode':'passive',
     \'active_filetypes':['perl', 'python'],
     \'passive_filetypes':[]
@@ -27,9 +20,9 @@ let g:syntastic_auto_jump=1
 
 " display
 set t_Co=256
-
 set background=dark
-"syntax enable
+let g:airline_theme = 'powerlineish'
+
 if has('gui_running')
     colorscheme monokai
     set guioptions=aegimrLt
@@ -37,12 +30,23 @@ else
     colorscheme monokai
 endif
 
-let g:airline_theme = 'powerlineish'
+" switch syntax highlighting on, when the terminal has colors
+" also switch on highlighting the last used search pattern.
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+    syntax on
+endif
 
-"Common VIM settings
+" vim handles long lines nicely
+"set wrap
+"set textwidth=80
+"set formatoptions=qrn1
+set colorcolumn=80
+
+" common vim settings
 set encoding=utf-8
 set ruler
-set number
+"set number
+set relativenumber
 set laststatus=2
 set showmode
 set modelines=0
@@ -56,11 +60,11 @@ set smartcase   "Do smart case matching
 set incsearch   "Incremental search
 set showmatch   "Show matching brackets.
 set hlsearch    "Highlight search matches
-set scrolloff=2 "Minimum number of lines to keep above cursor
+set scrolloff=4 "Minimum number of lines to keep above cursor
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
-" TAB settings
+" tab settings
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
@@ -71,16 +75,16 @@ filetype plugin on
 filetype indent on
 set smartindent
 
-" make pasting done without any indentation break.
+" paste done without indentation break
 set pastetoggle=<F3>
 
 " folding settings
 set foldmethod=indent   "fold based on indent ---other method would be syntax
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+set foldlevel=1
 
-" Display unprintable chars
+" display unprintable chars
 set list
 set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
 set showbreak=↪
@@ -99,7 +103,7 @@ augroup END
 " strip whitespace
 autocmd BufWritePre *.{go,pm,pl,py,js} :call <SID>StripTrailingWhitespaces()
 function! <SID>StripTrailingWhitespaces()
-    " save last search, and cursor position.
+    " save last search, and cursor position
     let _s=@/
     let l = line(".")
     let c = col(".")
@@ -125,29 +129,17 @@ set wildignore+=*migrations                      "Django migrations
 set wildignore+=*.pyc                            "Python Object codes
 set wildignore+=*.orig                           "Merge resolution files
 
-" vim handles long lines nicely
-"set wrap
-"set textwidth=80
-"set formatoptions=qrn1
-set colorcolumn=80
-
 " jump to the last position when reopening a file
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" working with split screens, resize split when window is resized
-au VimResized * :wincmd =
-
-" split screen ctrl+arrow navigation
-nmap <silent> <C-Up> :wincmd k<CR>
-nmap <silent> <C-Down> :wincmd j<CR>
-nmap <silent> <C-Left> :wincmd h<CR>
-nmap <silent> <C-Right> :wincmd l<CR>
-
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
+
+" working with split screens, resize split when window is resized
+au VimResized * :wincmd =
 
 " typo alias
 nmap :Q :q
