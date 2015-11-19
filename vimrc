@@ -1,22 +1,37 @@
-let mapleader = " "
-set nocompatible
-set history=100
-
 if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
 endif
 
-" key bindings
-nmap <leader><tab> :Sscratch<cr>
-nmap <leader>n     :NERDTreeToggle<cr>
-imap <leader>n     <ESC>:NERDTreeToggle<cr>i
 
-let g:syntastic_mode_map = {
-    \'mode':'passive',
-    \'active_filetypes':['perl', 'python'],
-    \'passive_filetypes':[]
-\}
-let g:syntastic_auto_jump=1
+"===============================================================================
+" General
+"===============================================================================
+
+
+" set character encoding to utf-8
+scriptencoding utfs8u" set encoding=utf-8
+set encoding=utf-8
+
+" don't use swap files
+set noswapfile
+
+" Reload files if changed outside vim
+set autoread
+
+set nocompatible
+set history=100
+
+
+"===============================================================================
+" Look and feel
+"===============================================================================
+
+
+" switch syntax highlighting on, when the terminal has colors
+" also switch on highlighting the last used search pattern.
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+    syntax on
+endif
 
 " display
 set t_Co=256
@@ -30,20 +45,69 @@ else
     colorscheme monokai
 endif
 
-" switch syntax highlighting on, when the terminal has colors
-" also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-    syntax on
-endif
-
 " vim handles long lines nicely
 "set wrap
 "set textwidth=80
 "set formatoptions=qrn1
 set colorcolumn=80
 
+" display unprintable chars
+set list
+set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
+set showbreak=↪
+
+
+"===============================================================================
+" Mappings and shortcuts
+"===============================================================================
+
+
+let mapleader = " "
+
+" key bindings
+nmap <leader><tab> :Sscratch<cr>
+nmap <leader>n     :NERDTreeToggle<cr>
+imap <leader>n     <ESC>:NERDTreeToggle<cr>i
+
+" save having to hit shift
+nnoremap ; :
+
+" typo alias
+nmap :Q :q
+nmap :W :w
+nmap :WQ :wq
+nmap :Wq :wq
+
+" remove help keys
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+
+"===============================================================================
+" Windows, buffers & navigation
+"===============================================================================
+
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+
+"===============================================================================
+" plugin setting
+"===============================================================================
+
+
+let g:syntastic_mode_map = {
+    \'mode':'passive',
+    \'active_filetypes':['perl', 'python'],
+    \'passive_filetypes':[]
+\}
+let g:syntastic_auto_jump=1
+
+
 " common vim settings
-set encoding=utf-8
 set ruler
 "set number
 set relativenumber
@@ -83,11 +147,6 @@ set foldmethod=indent   "fold based on indent ---other method would be syntax
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1
-
-" display unprintable chars
-set list
-set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
-set showbreak=↪
 
 " listchar=trail is not as flexible, use the below to highlight trailing
 " whitespace. Don't do it for unite windows or readonly files
@@ -134,23 +193,8 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
 " working with split screens, resize split when window is resized
 au VimResized * :wincmd =
-
-" typo alias
-nmap :Q :q
-nmap :W :w
-nmap :WQ :wq
-nmap :Wq :wq
-
-" remove help keys
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
 
 "===============================================================================
 " Unite
