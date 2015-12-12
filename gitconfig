@@ -1,24 +1,24 @@
 [user]
-	name = Stefan Amyotte
-	email = stefan.amyotte@gmail.com
+    name = Stefan Amyotte
+    email = stefan.amyotte@gmail.com
 [alias]
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	type = cat-file -t
-	dump = cat-file -p
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
 [core]
-	editor = vim
-    excludesfile = ~/.gitignore
+    editor = vim
+    xcludesfile = ~/.gitignore
 [color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
 [push]
-	default = simple
+    default = simple
 [diff]
     tool = vimdiff
 [merge]
