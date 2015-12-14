@@ -548,34 +548,36 @@ shopt -s checkwinsize
 ##########################################################################
 
 # add a line of "---" and the time between each command, recalculated every time the prompt is shown in function prompt_command
-fill="--- "
+#fill="--- "
 
-PS1="\[$NC\]\[$Grey\]"'$fill \t\n'"\[$BIPurple\]\h \[$BIBlue\]\w\[$NC\] \$ "
+#PS1="\[$NC\]\[$Grey\]"'$fill \t\n'"\[$BIPurple\]\h \[$BIBlue\]\w\[$NC\] \$ "
 
-# Reset color for command output, invoked every time before a command is executed
-trap 'echo -ne "\033[0m"' DEBUG
+## Reset color for command output, invoked every time before a command is executed
+#trap 'echo -ne "\033[0m"' DEBUG
 
-function prompt_command {
-	# create a $fill of all screen width minus the time string and a space:
-	let fillsize=${COLUMNS}-9
-	fill=""
-	while [ "$fillsize" -gt "0" ]
-	do
-		fill="-${fill}" # fill with underscores to work on 
-		let fillsize=${fillsize}-1
-	done
-	# If this is an xterm set the title to user@host:dir
-	case "$TERM" in
-		xterm*|rxvt*)
-		bname=`basename "${PWD/$HOME/~}"`
-		echo -ne "\033]0;${bname} :${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
-		;;
-		*)
-	    ;;
-	esac
-}
+#function prompt_command {
+	## create a $fill of all screen width minus the time string and a space:
+	#let fillsize=${COLUMNS}-9
+	#fill=""
+	#while [ "$fillsize" -gt "0" ]
+	#do
+		#fill="-${fill}" # fill with underscores to work on 
+		#let fillsize=${fillsize}-1
+	#done
+	## If this is an xterm set the title to user@host:dir
+	#case "$TERM" in
+		#xterm*|rxvt*)
+		#bname=`basename "${PWD/$HOME/~}"`
+		#echo -ne "\033]0;${bname} :${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
+		#;;
+		#*)
+		#;;
+	#esac
+#}
 
-PROMPT_COMMAND=prompt_command
+if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
+    source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+fi
 
 ##########################################################################
 # sourced files
