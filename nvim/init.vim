@@ -252,14 +252,14 @@ vnoremap K :m '<-2<CR>gv=gv
 " 3.5 F-key actions"{{{
 " ------------------------------------------------------------------------------
 
+" Toggle white characters visibility
+nnoremap <silent> <F2> :set list!<CR> :set list?<CR>
 " Paste mode toggling
 nnoremap <silent> <F3> :set paste!<CR> :set paste?<CR>
-" Source (reload configuration)
-nnoremap <F5> :source $HOME/.config/nvim/init.vim<CR>
 " Toggle search highlight
-nnoremap <silent> <F6> :set nohlsearch!<CR> :set nohlsearch?<CR>
-" Toggle white characters visibility
-nnoremap <silent> <F7> :set list!<CR> :set list?<CR>
+nnoremap <silent> <F4> :set nohlsearch!<CR> :set nohlsearch?<CR>
+" Source (reload configuration)
+nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
 
 "}}}
 " ------------------------------------------------------------------------------
