@@ -44,8 +44,9 @@ Plug 'yaunj/vim-yara'
 " 1.4 interface improvements "{{{
 " ------------------------------------------------------------------------------
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
 
 "}}}
@@ -87,6 +88,8 @@ Plug 'gregsexton/gitv'
 " 1.7 misc "{{{
 " ------------------------------------------------------------------------------
 
+" Asynchronous maker and linter (needs linters to work)
+Plug 'benekastah/neomake', { 'on': ['Neomake'] }
 Plug 'Shougo/deoplete.nvim'
 "Plug 'Shougo/neocomplete.vim'
 "Plug 'scrooloose/syntastic'
@@ -111,6 +114,7 @@ endif
 
 call plug#end()
 "}}}
+" ------------------------------------------------------------------------------
 
 "}}}
 " ==============================================================================
@@ -182,6 +186,7 @@ set foldlevel=1
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 "}}}
+" ------------------------------------------------------------------------------
 
 "}}}
 " ==============================================================================
@@ -244,16 +249,16 @@ vnoremap K :m '<-2<CR>gv=gv
 " Paste mode toggling
 nnoremap <silent> <F3> :set paste!<CR> :set paste?<CR>
 " Source (reload configuration)
-nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
+nnoremap <F5> :source $HOME/.config/nvim/init.vim<CR>
 " Toggle search highlight
 nnoremap <silent> <F6> :set nohlsearch!<CR> :set nohlsearch?<CR>
 " Toggle white characters visibility
 nnoremap <silent> <F7> :set list!<CR> :set list?<CR>
 
 "}}}
-" -----------------------------------------------------
+" ------------------------------------------------------------------------------
 " 3.6 Command abbreviations and mappings"{{{
-" -----------------------------------------------------
+" ------------------------------------------------------------------------------
 
 " save having to hit shift
 nnoremap ; :
@@ -269,6 +274,7 @@ cnoremap ww wqall
 cnoremap qq qall
 "
 "}}}
+" ------------------------------------------------------------------------------
 
 "}}}
 " ==============================================================================
@@ -340,9 +346,28 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
     \'.pyc',
   \], '\|'))
 
+
 "}}}
+" ------------------------------------------------------------------------------
+" 4.2 deoplete "{{{
+" ------------------------------------------------------------------------------
 
 let g:deoplete#enable_at_startup = 1
+
+"}}}
+" ------------------------------------------------------------------------------
+" 4.3 vimfiler "{{{
+" ------------------------------------------------------------------------------
+
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_enable_auto_cd = 1
+
+"}}}
+" ------------------------------------------------------------------------------
 
 "}}}
 " ==============================================================================
@@ -382,9 +407,87 @@ endfunction
 " ------------------------------------------------------------------------------
 " 5.2 nerdtree "{{{
 " ------------------------------------------------------------------------------
-nmap <leader>n :NERDTreeToggle<cr>
-imap <leader>n <ESC>:NERDTreeToggle<cr>i
+
+"nmap <leader>n :NERDTreeToggle<cr>
+"imap <leader>n <ESC>:NERDTreeToggle<cr>i
+
 "}}}
+" ------------------------------------------------------------------------------
+" 5.3 vimfiler "{{{
+" ------------------------------------------------------------------------------
+
+nmap <leader>e :VimFilerExplorer<cr>
+imap <leader>e :VimFilerExplorer<cr>
+"imap <leader>n <ESC>:VimFilerExplorer<cr>
+"nnoremap <leader>e :VimFilerBufferDir -buffer-name=explorer -split -simple -winwidth=35 -toggle -quit<cr>
+" Open filer in project folder.
+"nnoremap <leader>p :VimFiler -buffer-name=explorer2 -split -simple -winwidth=35 -toggle -project -quit<cr>
+"}}}
+" ------------------------------------------------------------------------------
+
+"}}}
+" ==============================================================================
+" 7.0 Autocommands "{{{
+" ==============================================================================
+
+" ------------------------------------------------------------------------------
+" 7.1 window resizing "{{{
+" ------------------------------------------------------------------------------
+
+" Resize splits when the window is resized
+autocmd VimResized * :wincmd =
+
+"}}}
+" ------------------------------------------------------------------------------
+" 7.2 save state "{{{
+" ------------------------------------------------------------------------------
+
+" return to last position when reopening files
+augroup line_return
+  au!
+  au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
+
+"}}}
+" ------------------------------------------------------------------------------
+" 7.3 Run linters after save "{{{
+" ------------------------------------------------------------------------------
+
+" npm install -g eslint
+autocmd BufWritePost *.js Neomake eslint
+" gem install rubocop
+autocmd BufWritePost *.rb Neomake rubocop
+" apt-get install tidy
+autocmd BufWritePost *.html Neomake tidy
+" apt-get install shellcheck
+autocmd BufWritePost *.sh Neomake shellcheck
+" pip3 install vim-vint
+autocmd BufWritePost *.vim Neomake vint
+" go get -u github.com/golang/lint/golint
+autocmd BufWritePost *.go Neomake golint
+
+"}}}
+" ------------------------------------------------------------------------------
+
+"}}}
+" ==============================================================================
+" 8.0 Todo, Notes "{{{
+" ==============================================================================
+
+" ------------------------------------------------------------------------------
+" 8.1 Todo"{{{
+" ------------------------------------------------------------------------------
+" 1. create README file.
+
+"}}}
+" ------------------------------------------------------------------------------
+" 8.2 Notes"{{{
+" ------------------------------------------------------------------------------
+"}}}
+" ------------------------------------------------------------------------------
 
 "}}}
 " ==============================================================================
