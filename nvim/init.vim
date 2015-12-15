@@ -142,10 +142,10 @@ set lazyredraw                " Don't redraw while executing macros (better perf
 "set nojoinspaces              " No extra space when joining a line which ends with . ? !
 "set scrolloff=5               " Scroll when closing to top or bottom of the screen
 "set updatetime=1000           " Update time used to create swap file or other things
+set expandtab
 set tabstop=4
 set shiftwidth=4
 set colorcolumn=80
-
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -176,20 +176,24 @@ set showbreak=↪
 " 2.5 folding settings "{{{
 " ------------------------------------------------------------------------------
 
-set foldmethod=marker
-"set foldmethod=indent   "fold based on indent ---other method would be syntax
+"set foldmethod=marker
+set foldmethod=indent
 set foldlevel=1
-set foldnestmax=10      "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
+set foldnestmax=10 "deepest fold is 10 levels
+set nofoldenable   "dont fold by default
 
 "}}}
 " ------------------------------------------------------------------------------
 " 2.6 theme"{{{
 " ------------------------------------------------------------------------------
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
 colorscheme gruvbox
+set background=dark
 let g:airline_theme = 'gruvbox'
+"if (&term =~ "xterm") || (&term =~ "screen")
+    "set t_Co=256
+"endif
 
 "}}}
 " ------------------------------------------------------------------------------

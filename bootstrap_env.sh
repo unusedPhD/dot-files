@@ -12,8 +12,7 @@ ln -s ~/code/dot-files/bashrc ~/.bashrc
 sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
-sudo apt-get install neovim
-sudo apt-get install python-dev python-pip python3-dev python3-pip
+sudo apt-get install neovim python-dev python-pip python3-dev python3-pip
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
 sudo update-alternatives --config vi
 sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
@@ -40,3 +39,7 @@ sudo apt-get install tmux
 ln -s ~/code/dot-files/tmux.conf ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+# install plugins on first launch of tmux --> <C-a> I
+
+#git clone https://git::@github.com/tmux-plugins/tmux-sensible.git ~/.tmux/plugins/tmux-sensible
+#git clone https://git::@github.com/jimeh/tmux-themepack.git ~/.tmux/plugins/tmux-themepack
