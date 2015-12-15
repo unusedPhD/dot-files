@@ -1,3 +1,11 @@
+set encoding=utf-8
+scriptencoding utf-8
+
+" define a group `vimrc` and initialize.
+augroup vimrc
+  autocmd!
+augroup END
+
 " ==============================================================================
 " Neovim Configuration
 " ==============================================================================
@@ -13,14 +21,14 @@
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+  autocmd vimrc VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.config/nvim/bundle')
+call g:plug#begin('~/.config/nvim/bundle')
 
 "}}}
 " ------------------------------------------------------------------------------
-" 1.2 look and feel"{{{
+" 1.2 look and feel "{{{
 " ------------------------------------------------------------------------------
 
 Plug 'morhetz/gruvbox'
@@ -108,11 +116,11 @@ Plug 'scrooloose/nerdcommenter'
 " 1.8 end of plugin declaration "{{{
 " ------------------------------------------------------------------------------
 
-if filereadable(expand("~/.config/nvim/bundles.local"))
+if filereadable(expand('~/.config/nvim/bundles.local'))
   source ~/.config/nvim/init.local
 endif
 
-call plug#end()
+call g:plug#end()
 "}}}
 " ------------------------------------------------------------------------------
 
@@ -165,7 +173,7 @@ set nohlsearch    " Don't highlight after search
 
 "}}}
 " ------------------------------------------------------------------------------
-" 2.4 white characters settings"{{{
+" 2.4 white characters settings "{{{
 " ------------------------------------------------------------------------------
 set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:␣
@@ -184,7 +192,7 @@ set nofoldenable   "dont fold by default
 
 "}}}
 " ------------------------------------------------------------------------------
-" 2.6 theme"{{{
+" 2.6 theme "{{{
 " ------------------------------------------------------------------------------
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -210,7 +218,7 @@ let g:mapleader="\<space>"
 
 "}}}
 " -----------------------------------------------------
-" 3.2 Disabling arrow keys, space key, exmode enter"{{{
+" 3.2 Disabling arrow keys, space key, exmode enter "{{{
 " with Q key, help with F1, etc.
 " -----------------------------------------------------
 
@@ -233,18 +241,12 @@ vnoremap <F1> <ESC>
 
 "}}}
 " ------------------------------------------------------------------------------
-" 3.3 Vim defaults overriding"{{{
+" 3.3 override vim defaults "{{{
 " ------------------------------------------------------------------------------
-
-" Cancel terminal mode with ,escape
-if has('nvim')
-  tnoremap <ESC> <C-\><C-n>
-  tnoremap ,<ESC> <ESC>
-endif
 
 "}}}
 " ------------------------------------------------------------------------------
-" 3.4 Common tasks"{{{
+" 3.4 common tasks "{{{
 " ------------------------------------------------------------------------------
 
 " Move visual block
@@ -253,7 +255,7 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "}}}
 " ------------------------------------------------------------------------------
-" 3.5 F-key actions"{{{
+" 3.5 F-key actions "{{{
 " ------------------------------------------------------------------------------
 
 " Toggle white characters visibility
@@ -267,7 +269,7 @@ nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
 
 "}}}
 " ------------------------------------------------------------------------------
-" 3.6 Command abbreviations and mappings"{{{
+" 3.6 Command abbreviations and mappings "{{{
 " ------------------------------------------------------------------------------
 
 " save having to hit shift
@@ -296,11 +298,11 @@ cnoremap qq qall
 " ------------------------------------------------------------------------------
 
 " matcher settings
-call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_current_file'])
+call g:unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_current_file'])
 " rank sorter settings
-call unite#filters#sorter_default#use(['sorter_rank'])
+call g:unite#filters#sorter_default#use(['sorter_rank'])
 
-let g:unite_data_directory = "~/.cache/unite"
+let g:unite_data_directory = '~/.cache/unite'
 
 " Enable history yank source
 let g:unite_source_history_yank_enable = 1
@@ -342,7 +344,7 @@ elseif executable('ack')
 endif
 
 " custom ignores
-call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+call g:unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
   \'ignore_pattern', join([
     \'\.git/',
     \'git5/.*/review/',
@@ -404,7 +406,7 @@ nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
 nnoremap <silent> <leader>l :<C-u>Unite -start-insert -buffer-name=search_file line<CR>
 
 " custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
+autocmd vimrc FileType unite call s:unite_settings()
 function! s:unite_settings()
   " play nice with supertab
   let b:SuperTabDisabled=1
@@ -445,7 +447,7 @@ imap <leader>e :VimFilerExplorer<cr>
 " ------------------------------------------------------------------------------
 
 " Resize splits when the window is resized
-autocmd VimResized * :wincmd =
+autocmd vimrc VimResized * :wincmd =
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -453,9 +455,9 @@ autocmd VimResized * :wincmd =
 " ------------------------------------------------------------------------------
 
 " return to last position when reopening files
-augroup line_return
-  au!
-  au BufReadPost *
+augroup savePosition
+    autocmd!
+    autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \     execute 'normal! g`"zvzz' |
         \ endif
@@ -466,18 +468,20 @@ augroup END
 " 6.3 Run linters after save "{{{
 " ------------------------------------------------------------------------------
 
-" npm install -g eslint
-autocmd BufWritePost *.js Neomake eslint
-" gem install rubocop
-autocmd BufWritePost *.rb Neomake rubocop
-" apt-get install tidy
-autocmd BufWritePost *.html Neomake tidy
-" apt-get install shellcheck
-autocmd BufWritePost *.sh Neomake shellcheck
-" pip3 install vim-vint
-autocmd BufWritePost *.vim Neomake vint
-" go get -u github.com/golang/lint/golint
-autocmd BufWritePost *.go Neomake golint
+augroup linters
+    " npm install -g eslint
+    autocmd BufWritePost *.js Neomake eslint
+    " gem install rubocop
+    autocmd BufWritePost *.rb Neomake rubocop
+    " apt-get install tidy
+    autocmd BufWritePost *.html Neomake tidy
+    " apt-get install shellcheck
+    autocmd BufWritePost *.sh Neomake shellcheck
+    " pip3 install vim-vint
+    autocmd BufWritePost *.vim Neomake vint
+    " go get -u github.com/golang/lint/golint
+    autocmd BufWritePost *.go Neomake golint
+augroup END
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -488,13 +492,13 @@ autocmd BufWritePost *.go Neomake golint
 " ==============================================================================
 
 " ------------------------------------------------------------------------------
-" 7.1 Todo"{{{
+" 7.1 Todo "{{{
 " ------------------------------------------------------------------------------
 " 1. create README file.
 
 "}}}
 " ------------------------------------------------------------------------------
-" 7.2 Notes"{{{
+" 7.2 Notes "{{{
 " ------------------------------------------------------------------------------
 "}}}
 " ------------------------------------------------------------------------------
