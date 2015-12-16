@@ -46,6 +46,7 @@ Plug 'vim-scripts/vim-webdevicons'
 Plug 'mephux/bro.vim'
 Plug 'elubow/cql-vim'
 Plug 'yaunj/vim-yara'
+"Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -56,6 +57,8 @@ Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
+"Plug 'majutsushi/tagbar'
+"Plug 'xolox/vim-easytags'
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -110,6 +113,7 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'tpope/vim-surround'
 "Plug 'SirVer/ultisnips'
 "Plug 'benekastah/neomake'
+Plug 'sheerun/vim-polyglot'
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -133,7 +137,8 @@ call g:plug#end()
 " 2.1 sensible defaults "{{{
 " ------------------------------------------------------------------------------
 set shell=/bin/bash
-set number                     " Line numbers on
+"set number
+set relativenumber
 "set showmode                  " Always show mode
 "set showcmd                   " Show commands as you type them
 "set textwidth=120             " Text width is 120 characters
@@ -241,13 +246,21 @@ vnoremap <F1> <ESC>
 
 "}}}
 " ------------------------------------------------------------------------------
-" 3.3 override vim defaults "{{{
+" 3.3 split "{{{
 " ------------------------------------------------------------------------------
+
+"" Split
+noremap <Leader>h :<C-u>split<CR>
+noremap <Leader>v :<C-u>vsplit<CR>
 
 "}}}
 " ------------------------------------------------------------------------------
 " 3.4 common tasks "{{{
 " ------------------------------------------------------------------------------
+
+"" Vmap for maintain Visual Mode after shifting > and <
+vmap < <gv
+vmap > >gv
 
 " Move visual block
 vnoremap J :m '>+1<CR>gv=gv
@@ -276,10 +289,20 @@ nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
 nnoremap ; :
 
 " typo alias
-nmap :Q :q
-nmap :W :w
-nmap :WQ :wq
-nmap :Wq :wq
+"nmap :Q :q
+"nmap :W :w
+"nmap :WQ :wq
+"nmap :Wq :wq
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
 
 " Quiting and saving all
 cnoremap ww wqall
@@ -482,6 +505,24 @@ augroup linters
     " go get -u github.com/golang/lint/golint
     autocmd BufWritePost *.go Neomake golint
 augroup END
+
+"}}}
+" ------------------------------------------------------------------------------
+" 6.4 strip whitespace "{{{
+" ------------------------------------------------------------------------------
+
+autocmd vimrc BufWritePre *.{go,pm,pl,py,js} :call <SID>StripTrailingWhitespaces()
+function! <SID>StripTrailingWhitespaces()
+    " save last search, and cursor position
+    let l:_s=@/
+    let l:l = line('.')
+    let l:c = col('.')
+    " strip whitespace
+    %s/\s\+$//e
+    " restore previous search history, and cursor position
+    let @/=l:_s
+    call cursor(l:l, l:c)
+endfunction
 
 "}}}
 " ------------------------------------------------------------------------------
