@@ -548,6 +548,9 @@ shopt -s checkwinsize
 ##########################################################################
 
 if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
+    powerline-daemon -q
+    POWERLINE_BASH_CONTINUATION=1
+    POWERLINE_BASH_SELECT=1
     source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 else
     # add a line of "---" and the time between each command, recalculated every time the prompt is shown in function prompt_command
