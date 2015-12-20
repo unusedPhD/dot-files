@@ -36,7 +36,6 @@ Plug 'morhetz/gruvbox'
 "Plug 'joshdick/onedark.vim'
 Plug 'bling/vim-airline'
 "Plug 'joshdick/airline-onedark.vim'
-Plug 'vim-scripts/vim-webdevicons'
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -53,7 +52,8 @@ Plug 'yaunj/vim-yara'
 " 1.4 interface improvements "{{{
 " ------------------------------------------------------------------------------
 
-Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
+Plug 'Shougo/vimfiler.vim'
+"Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
@@ -114,6 +114,7 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'SirVer/ultisnips'
 "Plug 'benekastah/neomake'
 Plug 'sheerun/vim-polyglot'
+Plug 'vim-scripts/vim-webdevicons'
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -136,9 +137,10 @@ call g:plug#end()
 " ------------------------------------------------------------------------------
 " 2.1 sensible defaults "{{{
 " ------------------------------------------------------------------------------
+
 set shell=/bin/bash
-"set number
 set relativenumber
+set number
 "set showmode                  " Always show mode
 "set showcmd                   " Show commands as you type them
 "set textwidth=120             " Text width is 120 characters
@@ -320,66 +322,65 @@ cnoremap qq qall
 " 4.1 unite "{{{
 " ------------------------------------------------------------------------------
 
-" matcher settings
-call g:unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_current_file'])
-" rank sorter settings
-call g:unite#filters#sorter_default#use(['sorter_rank'])
+let g:unite_prompt = '➤ '
 
 let g:unite_data_directory = '~/.cache/unite'
 
 " Enable history yank source
 let g:unite_source_history_yank_enable = 1
 
-" Open in bottom right
-"let g:unite_split_rule = "botright"
-
-" Shorten the default update date of 500ms
-"let g:unite_update_time = 200
-
-"let g:unite_source_file_mru_limit = 1000
+let g:unite_source_rec_max_cache_files = 99999
+"
 "let g:unite_cursor_line_highlight = 'TabLineSel'
 "let g:unite_abbr_highlight = 'TabLine'
 
-let g:unite_source_rec_max_cache_files = 99999
+let g:unite_source_file_mru_limit = 200
+let g:unite_source_file_mru_filename_format = ':~:.'
 
-"let g:unite_source_file_mru_filename_format = ':~:.'
-"let g:unite_source_file_mru_time_format = ''
+" matcher settings
+call g:unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_current_file'])
+" rank sorter settings
+call g:unite#filters#sorter_default#use(['sorter_rank'])
 
 if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-      \'-i ' .
-      \'--vimgrep ' .
-      \'--hidden ' .
-      \'--ignore ''.hg'' ' .
-      \'--ignore ''.svn'' ' .
-      \'--ignore ''.git'' ' .
-      \'--ignore ''.bzr'' '
-  let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup -g ""'
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+        \'-i ' .
+        \'--vimgrep ' .
+        \'--hidden ' .
+        \'--ignore ''.hg'' ' .
+        \'--ignore ''.svn'' ' .
+        \'--ignore ''.git'' ' .
+        \'--ignore ''.bzr'' '
+    let g:unite_source_grep_recursive_opt = ''
 elseif executable('ack-grep')
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts = '-i --no-heading --no-color -a -H'
-  let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_command = 'ack-grep'
+    let g:unite_source_grep_default_opts = '-i --no-heading --no-color -a -H'
+    let g:unite_source_grep_recursive_opt = ''
 elseif executable('ack')
-  let g:unite_source_grep_command = 'ack'
-  let g:unite_source_grep_default_opts = '-i --no-heading --no-color -a -H'
-  let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_command = 'ack'
+    let g:unite_source_grep_default_opts = '-i --no-heading --no-color -a -H'
+    let g:unite_source_grep_recursive_opt = ''
 endif
 
 " custom ignores
-call g:unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-  \'ignore_pattern', join([
-    \'\.git/',
-    \'git5/.*/review/',
-    \'google/obj/',
-    \'tmp/',
-    \'.sass-cache',
-    \'node_modules/',
-    \'bower_components/',
-    \'dist/',
-    \'.git5_specs/',
-    \'.pyc',
-  \], '\|'))
+call g:unite#custom_source(
+    \'file_rec,file_rec/async,file_mru,file,buffer,grep',
+    \'ignore_pattern',
+    \join([
+        \'\.git/',
+        \'git5/.*/review/',
+        \'google/obj/',
+        \'tmp/',
+        \'.sass-cache',
+        \'node_modules/',
+        \'bower_components/',
+        \'dist/',
+        \'.git5_specs/',
+        \'.pyc',
+    \],'\|')
+\)
 
 
 "}}}
@@ -395,11 +396,13 @@ let g:deoplete#enable_at_startup = 1
 " ------------------------------------------------------------------------------
 
 let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_enable_auto_cd = 1
+call g:vimfiler#custom#profile('default', 'context', {
+      \ 'safe' : 0,
+      \ 'auto-cd' : 1,
+\ })
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -414,19 +417,25 @@ let g:vimfiler_enable_auto_cd = 1
 " ------------------------------------------------------------------------------
 
 " scan current dir
-nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file<cr>
+nnoremap <silent> <leader>fd :<C-u>Unite -no-split -buffer-name=files -start-insert file<cr>
 " scan project dir
-nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
-" mru
-nnoremap <leader>m :<C-u>Unite -no-split -buffer-name=mru -start-insert file_mru<cr>
-" outline
-nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-" yank history
-nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
-" buffer
-nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
-" line
-nnoremap <silent> <leader>l :<C-u>Unite -start-insert -buffer-name=search_file line<CR>
+nnoremap <silent> <leader>fc :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec<cr>
+nnoremap <silent> <leader>fv :<C-u>Unite -no-split -buffer-name=files -start-insert -default-action=vsplit file_rec<cr>
+nnoremap <silent> <leader>fh :<C-u>Unite -no-split -buffer-name=files -start-insert -default-action=split file_rec<cr>
+nnoremap <silent> <leader>ft :<C-u>Unite -no-split -buffer-name=files -start-insert -default-action=tabopen file_rec<cr>
+nnoremap <silent> <leader>fa :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
+" scan mru
+nnoremap <silent> <leader>m  :<C-u>Unite -no-split -buffer-name=mru -start-insert file_mru<cr>
+" scan outline
+nnoremap <silent> <leader>o  :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+" scan yank history
+nnoremap <silent> <leader>y  :<C-u>Unite -no-split -buffer-name=yank -start-insert history/yank<cr>
+" scan buffer
+nnoremap <silent> <leader>b  :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
+" scan lines of current file
+nnoremap <silent> <leader>l  :<C-u>Unite -start-insert -buffer-name=search_file line<CR>
+" grep current dir
+nnoremap <silent> <leader>g  :<C-u>Unite -no-split -silent -buffer-name=ag grep:.<CR>
 
 " custom mappings for the unite buffer
 autocmd vimrc FileType unite call s:unite_settings()
@@ -440,23 +449,20 @@ endfunction
 
 "}}}
 " ------------------------------------------------------------------------------
-" 5.2 nerdtree "{{{
+" 5.2 vimfiler "{{{
+" ------------------------------------------------------------------------------
+
+nnoremap <silent> <leader>ed :VimFilerBufferDir -buffer-name=explorer-current -split -simple -winwidth=35 -toggle -quit<cr>
+nnoremap <silent> <leader>ep :VimFiler -buffer-name=explorer-project -split -simple -winwidth=35 -toggle -project -quit<cr>
+
+"}}}
+" ------------------------------------------------------------------------------
+" 5.3 nerdtree "{{{
 " ------------------------------------------------------------------------------
 
 "nmap <leader>n :NERDTreeToggle<cr>
 "imap <leader>n <ESC>:NERDTreeToggle<cr>i
 
-"}}}
-" ------------------------------------------------------------------------------
-" 5.3 vimfiler "{{{
-" ------------------------------------------------------------------------------
-
-nmap <leader>e :VimFilerExplorer<cr>
-imap <leader>e :VimFilerExplorer<cr>
-"imap <leader>n <ESC>:VimFilerExplorer<cr>
-"nnoremap <leader>e :VimFilerBufferDir -buffer-name=explorer -split -simple -winwidth=35 -toggle -quit<cr>
-" Open filer in project folder.
-"nnoremap <leader>p :VimFiler -buffer-name=explorer2 -split -simple -winwidth=35 -toggle -project -quit<cr>
 "}}}
 " ------------------------------------------------------------------------------
 
