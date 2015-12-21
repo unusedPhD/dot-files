@@ -22,13 +22,8 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 export GOPATH=$HOME/code/go/
-export GOROOT=$HOME/bin/go
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
 
+# set caplock to escape
 /usr/bin/setxkbmap -option "caps:swapescape"
-
-#if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-#        export TERM='xterm-256color'
-#else
-#        export TERM='xterm-color'
-#fi
