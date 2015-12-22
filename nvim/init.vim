@@ -281,6 +281,8 @@ nnoremap <silent> <F3> :set paste!<CR> :set paste?<CR>
 nnoremap <silent> <F4> :set nohlsearch!<CR> :set nohlsearch?<CR>
 " Source (reload configuration)
 nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
+" terminal: exit insert mode
+"tnoremap <F12> <c-\><C-n>
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -291,10 +293,6 @@ nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
 nnoremap ; :
 
 " typo alias
-"nmap :Q :q
-"nmap :W :w
-"nmap :WQ :wq
-"nmap :Wq :wq
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev Qall! qall!
@@ -310,6 +308,14 @@ cnoreabbrev Qall qall
 cnoremap ww wqall
 cnoremap qq qall
 "
+"}}}
+" ------------------------------------------------------------------------------
+" 3.7 terminal "{{{
+" ------------------------------------------------------------------------------
+
+" exit insert mode
+tnoremap <F12> <c-\><C-n>
+
 "}}}
 " ------------------------------------------------------------------------------
 
@@ -346,7 +352,12 @@ call g:unite#filters#sorter_default#use(
 \)
 
 if executable('ag')
-    let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup -g ""'
+    let g:unite_source_rec_async_command = 
+        \'ag '
+        \'--nocolor '
+        \'--follow '
+        \'--nogroup '
+        \'-g ""'
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts =
         \'-i ' .
@@ -373,14 +384,11 @@ call g:unite#custom_source(
     \'ignore_pattern',
     \join([
         \'\.git/',
-        \'git5/.*/review/',
-        \'google/obj/',
         \'tmp/',
         \'.sass-cache',
         \'node_modules/',
         \'bower_components/',
         \'dist/',
-        \'.git5_specs/',
         \'.pyc',
     \],'\|')
 \)
@@ -420,23 +428,22 @@ call g:vimfiler#custom#profile('default', 'context', {
 " 5.1 unite and extensions "{{{
 " ------------------------------------------------------------------------------
 
-" scan current dir
-nnoremap <silent> <leader>fd :<C-u>Unite -no-split -buffer-name=files-current -resume -start-insert file<cr>
-" scan project dir
-nnoremap <silent> <leader>fc :<C-u>Unite -no-split -buffer-name=files -resume -start-insert file_rec/async<cr>
-nnoremap <silent> <leader>fv :<C-u>Unite -no-split -buffer-name=files -resume -start-insert -default-action=vsplit file_rec/async<cr>
-nnoremap <silent> <leader>fh :<C-u>Unite -no-split -buffer-name=files -resume -start-insert -default-action=split file_rec/async<cr>
-nnoremap <silent> <leader>ft :<C-u>Unite -no-split -buffer-name=files -resume -start-insert -default-action=tabopen file_rec/async<cr>
-" scan mru
+" search current dir
+nnoremap <silent> <leader>fd :<C-u>Unite -no-split -buffer-name=files-current -resume -input= -start-insert file<cr>
+" search project dir
+nnoremap <silent> <leader>fc :<C-u>Unite -no-split -buffer-name=files -resume -input= -start-insert file_rec/async:!<cr>
+nnoremap <silent> <leader>fv :<C-u>Unite -no-split -buffer-name=files -resume -input= -start-insert -default-action=vsplit file_rec/async:!<cr>
+nnoremap <silent> <leader>fh :<C-u>Unite -no-split -buffer-name=files -resume -input= -start-insert -default-action=split file_rec/async:!<cr>
+nnoremap <silent> <leader>ft :<C-u>Unite -no-split -buffer-name=files -resume -input= -start-insert -default-action=tabopen file_rec/async:!<cr>
+" search mru
 nnoremap <silent> <leader>m  :<C-u>Unite -no-split -buffer-name=mru -resume -start-insert file_mru<cr>
-" scan outline
+" search outline
 nnoremap <silent> <leader>o  :<C-u>Unite -no-split -buffer-name=outline -resume -auto-preview outline<cr>
-" scan yank history
+" search yank history
 nnoremap <silent> <leader>y  :<C-u>Unite -no-split -buffer-name=yank -resume -quick-match history/yank<cr>
-"nnoremap <silent> <leader>y  :<C-u>Unite -no-split -buffer-name=yank -resume -start-insert history/yank<cr>
-" scan buffer
+" search buffer
 nnoremap <silent> <leader>b  :<C-u>Unite -no-split -buffer-name=buffer -resume -quick-match buffer<cr>
-" scan lines of current file
+" search lines of current file
 nnoremap <silent> <leader>l  :<C-u>Unite -buffer-name=search_file -resume -start-insert line<CR>
 " grep current dir
 nnoremap <silent> <leader>g  :<C-u>Unite -no-split -silent -buffer-name=ag grep:.<CR>
@@ -503,17 +510,29 @@ augroup END
 
 augroup linters
     " npm install -g eslint
-    autocmd BufWritePost *.js Neomake eslint
+    if executable('eslint')
+        autocmd BufWritePost *.js Neomake eslint
+    endif
     " gem install rubocop
-    autocmd BufWritePost *.rb Neomake rubocop
+    if executable('rubocop')
+        autocmd BufWritePost *.rb Neomake rubocop
+    endif
     " apt-get install tidy
-    autocmd BufWritePost *.html Neomake tidy
+    if executable('tidy')
+        autocmd BufWritePost *.html Neomake tidy
+    endif
     " apt-get install shellcheck
-    autocmd BufWritePost *.sh Neomake shellcheck
+    if executable('shellcheck')
+        autocmd BufWritePost *.sh Neomake shellcheck
+    endif
     " pip3 install vim-vint
-    autocmd BufWritePost *.vim Neomake vint
+    if executable('vint')
+        autocmd BufWritePost *.vim Neomake vint
+    endif
     " go get -u github.com/golang/lint/golint
-    autocmd BufWritePost *.go Neomake golint
+    if executable('golint') 
+        autocmd BufWritePost *.go Neomake golint
+    endif
 augroup END
 
 "}}}
