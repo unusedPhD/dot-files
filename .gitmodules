@@ -1,6 +1,3 @@
-[submodule "bin/cdd"]
-	path = bin/cdd
-	url = git@github.com:unusedPhD/cdd.git
 [submodule "irssi/weed"]
 	path = irssi/weed
 	url = git@github.com:ronilaukkarinen/weed.git
@@ -10,3 +7,6 @@
 [submodule "sublimetext/Packages/Bro"]
 	path = sublimetext/Packages/Bro
 	url = https://github.com/bro/bro-sublime.git
+[submodule "bash/cdd"]
+	path = bash/cdd
+	url = git@github.com:unusedPhD/cdd.git
