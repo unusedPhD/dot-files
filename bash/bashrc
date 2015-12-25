@@ -135,7 +135,6 @@ export EDITOR=vim
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias tetris='bastet'
 alias cdd=". $HOME/code/dot-files/bash/cdd/cdd.sh"
-alias t="$HOME/Drive/bin/todo.txt/todo.sh"
 
 # aliases for git
 alias gs='git status'
@@ -159,22 +158,20 @@ alias dist-upgrade='sudo apt-get dist-upgrade'
 alias update='sudo apt-get update && sudo apt-get dist-upgrade'
 
 alias ..='cd ../'
+alias 2.='cd ../'
 alias ...='cd ../../'
+alias 3.='cd ../../'
 alias ....='cd ../../../'
-alias .....='cd ../../../../'
-alias .4='cd ../../../../'
-alias .5='cd ../../../../../'
+alias 4.='cd ../../../'
+
 alias c='clear'
 alias q='exit'
 alias :q='exit'
 alias reboot='sudo /sbin/reboot'
-alias reload='source ~/.bashrc; clear'
 alias df='df -kTh'
 alias more='less'
-alias vi='vim'
 alias wget='wget -c'
 alias slist='sudo vim /etc/apt/sources.list'
-alias ls_functions='grep ^function ~/.bashrc'
 alias shred='shred -n 10 -u -v -z'
 
 # common mispelled commands

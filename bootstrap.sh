@@ -1,8 +1,7 @@
 #!/bin/sh
 VERSION="\n bootstrap v0.1.0\n"
-USAGE="\n
-Usage: bootstrap.sh [-a | -debnvgtovh]\n
-\n
+USAGE="
+Usage: bootstrap.sh [ -a | -debnvgto | -vh ] \n
 \t -a | install all components
 \t -d | apt-get install dependencies
 \t -e | set up general environment
@@ -12,10 +11,10 @@ Usage: bootstrap.sh [-a | -debnvgtovh]\n
 \t -g | set up git
 \t -t | set up tmux
 \t -o | set up golang
-\t -v | for version\n
+\t -v | for version
 \t -h | for help\n"
 
-while getopts ":adebnvgt" opt; do
+while getopts ":adebnvgtovh" opt; do
     case $opt in
        a)   ALL=true;;
        d)   DEPENDENCY=true;;
