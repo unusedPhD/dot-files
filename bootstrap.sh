@@ -30,11 +30,11 @@ while getopts ":adebnvgtovh" opt; do
     esac
 done
 
-if [ $DEPENDENCY -o $ALL ]; then
+if [ $DEPENDENCY ] || [ $ALL ]; then
     sudo apt-get install git python-dev python-pip python3-dev python3-pip htop
 fi
 
-if [ $ENVIRO -o $ALL ]; then
+if [ $ENVIRO ] || [ $ALL ]; then
     rm ~/.config/user-dirs.dirs
     rm ~/.config/user-dirs.locale
     ln -s ~/code/dot-files/config/user-dirs.dirs ~/.config/user-dirs.dirs
@@ -49,13 +49,13 @@ if [ $ENVIRO -o $ALL ]; then
     fc-cache -vf ~/.fonts/
 fi
 
-if [ $BASH -o $ALL ]; then
+if [ $BASH ] || [ $ALL ]; then
     rm ~/.bashrc
     ln -s ~/code/dot-files/bashrc ~/.bashrc
     pip install powerline-status
 fi
 
-if [ $NEOVIM -o $ALL ]; then
+if [ $NEOVIM ] || [ $ALL ]; then
     sudo apt-get install software-properties-common
     sudo add-apt-repository ppa:neovim-ppa/unstable
     sudo apt-get update
@@ -72,14 +72,14 @@ if [ $NEOVIM -o $ALL ]; then
     ln -s ~/code/dot-files/nvim/init.vim ~/.config/nvim/
 fi
 
-if [ $VIM -o $ALL ]; then
+if [ $VIM ] || [ $ALL ]; then
     sudo apt-get install vim-nox
     rm ~/.vimrc
     ln -s ~/code/dot-files/vim/vimrc ~/.vimrc
     ln -s ~/code/dot-files/vim/vimrc.bundles ~/.vimrc.bundles
 fi
 
-if [ $TMUX -o $ALL ]; then
+if [ $TMUX ] || [ $ALL ]; then
     sudo apt-get install tmux
     ln -s ~/code/dot-files/tmux.conf ~/.tmux.conf
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -87,7 +87,7 @@ if [ $TMUX -o $ALL ]; then
     echo "alias tmux='tmux -2'" >> ~/.bash_aliases
 fi
 
-if [ $GIT -o $ALL ]; then
+if [ $GIT ] || [ $ALL ]; then
     sudo apt-get install git
     rm ~/.gitconfig
     rm ~/.gitignore
@@ -95,7 +95,7 @@ if [ $GIT -o $ALL ]; then
     ln -s ~/code/dot-files/gitignore ~/.gitignore
 fi
 
-if [ $GOLANG -o $ALL ]; then
+if [ $GOLANG ] || [ $ALL ]; then
     # grab latest stable release
     wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz /tmp/
     cd /tmp/
