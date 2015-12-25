@@ -25,13 +25,14 @@ while getopts ":adebnvgtovh" opt; do
        g)   GIT=true;;
        t)   TMUX=true;;
        O)   GOLANG=true;;
+       b)   BRO=true;;
        v)   echo "$VERSION"; exit 1;;
        h)   echo "$USAGE"; exit 1;;
     esac
 done
 
 if [ $DEPENDENCY ] || [ $ALL ]; then
-    sudo apt-get install git python-dev python-pip python3-dev python3-pip htop
+    sudo apt-get install git python-dev python-pip python3-dev python3-pip htop build-essential
 fi
 
 if [ $ENVIRO ] || [ $ALL ]; then
@@ -117,4 +118,15 @@ if [ $GOLANG ] || [ $ALL ]; then
 
     # grab common binaries
     go get -u github.com/golang/lint/golint
+fi
+
+if [ $BRO ] || [ $ALL ]; then
+    sudo apt-get install bison
+    cd /usr/src/
+    sudo wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
+    sudo tar xvzf bro-2.4.1.tar.gz
+    cd bro-2.4.1
+    sudo ./configure --prefix=/opt/bro
+    sudo make
+    sudo make install
 fi
