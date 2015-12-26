@@ -1,15 +1,16 @@
 #!/bin/sh
-VERSION="\n bootstrap v0.1.0\n"
+VERSION="\n bootstrap v0.2.0\n"
 USAGE="
 Usage: bootstrap.sh [ -a | -debnvgto | -vh ] \n
 \t -a | install all components
 \t -d | apt-get install dependencies
 \t -e | set up general environment
 \t -b | set up bash
+\t -f | set up fish
+\t -t | set up tmux
 \t -n | set up neovim
 \t -v | set up vim
 \t -g | set up git
-\t -t | set up tmux
 \t -o | set up golang
 \t -v | for version
 \t -h | for help\n"
@@ -74,6 +75,8 @@ if [ $FISH ] || [ $ALL ]; then
     omf install bobthefish
     omf theme bobthefish
     ln -s ~/code/dot-files/fish/init.fish ~/.config/omf/
+    # change default shell to fish
+    chsh -s /usr/bin/fish
 fi
 
 if [ $TMUX ] || [ $ALL ]; then
@@ -82,6 +85,10 @@ if [ $TMUX ] || [ $ALL ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     # install plugins on first launch of tmux --> <C-a> I
     echo "alias tmux='tmux -2'" >> ~/.bash_aliases
+    # add to local alias if using fish shell
+    if [ -e ~/.config/fish/alias.fish ]; then
+        echo "alias tmux 'tmux -2'" >> ~/.config/fish/alias_local.fish
+    fi
 fi
 
 if [ $NEOVIM ] || [ $ALL ]; then
@@ -91,11 +98,8 @@ if [ $NEOVIM ] || [ $ALL ]; then
     sudo apt-get install neovim
     sudo pip3 install neovim
     sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-    #sudo update-alternatives --config vi
     sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-    #sudo update-alternatives --config vim
     sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-    #sudo update-alternatives --config editor
     mkdir ~/.config/nvim
     rm ~/.config/nvim/init.vim
     ln -s ~/code/dot-files/nvim/init.vim ~/.config/nvim/

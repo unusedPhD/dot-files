@@ -14,4 +14,3 @@ set -g ALIAS_PATH $HOME/.config/fish
 
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
-

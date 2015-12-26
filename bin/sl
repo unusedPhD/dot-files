@@ -16,7 +16,6 @@
 
 if {[package vcompare [info patchlevel] 8.5] < 0} { puts stderr "ERROR: requires Tcl 8.5"; exit 1 }
 
-
 if { ![catch {set tty [exec stty -a]}] && [regexp {(\d+)\s+columns} $tty all TERMINFO(width)]} {
 } elseif {[info exists env(COLUMNS)]} {set TERMINFO(width) $env(COLUMNS)
 } else {set TERMINFO(width) 80}
@@ -24,7 +23,6 @@ if { ![catch {set tty [exec stty -a]}] && [regexp {(\d+)\s+columns} $tty all TER
 array set TIME [list SECOND 1 MINUTE [expr 60] HOUR [expr 60*60] DAY [expr 60*60*24] MONTH [expr 60*60*24*30] YEAR [expr 60*60*24*365]]
 array set TIME [list now [clock seconds]]
 set TIME(epsilon) $TIME(MINUTE)	;# amount that times must differ to be considered different, due to different clocks, delays in file system and network, ...
-
 
 # groups: by suffix, by exact name (modulo compression wrapper), by regexp
 # This is not intended to be a complete database -- add more and reassign in your ~/.sl.tcl startup file.
@@ -131,7 +129,6 @@ foreach {key val} {
 set SWITCH(mounts) {/Volumes}
 set SWITCH(encoding) [encoding system]
 encoding system identity
-
 
 # control
 proc sl {dir {level 0}} {
@@ -365,9 +362,6 @@ proc sl2 {dir raw cooked level} {
 	}
     }
 }
-
-
-
 #
 # organization: grouping
 #
@@ -473,8 +467,6 @@ proc normalizekey {t sfx} {
     return $s
 }
 
-
-
 #
 # data: relatively recent, relatively large, version control
 #
@@ -553,7 +545,6 @@ proc cutoff {what l by} {
     return [list $val $rep]
 }
 
-
 proc peculiar {mode type} {
     # 1. anything peculiar?
     # zots
@@ -589,8 +580,6 @@ proc peculiar {mode type} {
     }
     return $post
 }
-
-
 
 # version control
 
@@ -658,12 +647,9 @@ proc vc-cvs {dir l} {
     return $l2
 }
 
-
-
 #
 # display: filter, series, prefix, layout
 #
-
 
 proc distinctive {tuple} {
     global STYLE
@@ -677,7 +663,6 @@ proc distinctive {tuple} {
     return $show
 }
 
-
 proc prettyname {d type group} {
     # SWITCH(title) is not on by default because you have type the exact name in,
     # but it's OK if you use file completion and are aware that the filename display may not be exactly the same.
@@ -687,7 +672,6 @@ proc prettyname {d type group} {
 
     return $d
 }
-
 
 # requires list sorted in dictionary order
 proc series {l} {
@@ -785,13 +769,11 @@ proc prefix {l} {
     return [list $l2 $cnt $cntch]
 }
 
-
 # sorting comparators
 proc byascii {f1 f2} { return [string compare $f1 $f2] }
 proc by1 {f1 f2} { return [string compare -length 1 $f1 $f2] }
 # would like to use lsort -integer but handle a file size larger than 4GB on 32-bit machines, (return non-bignum result!)
 proc bybignum {n1 n2} { return [expr {$n1<$n2?-1:[expr $n1==$n2?0:1]}] }
-
 
 # "[l10n file]" vs "$l10n(file)" -- same number of chars
 proc l10n {word} {
@@ -799,7 +781,6 @@ proc l10n {word} {
     if {[info exists I18N($word)]} {set word $I18N($word)}
     return $word
 }
-
 
 set COLSEP 1	;# min space between columns, but effectively +2=3 from 'pre', almost always appears to be much more due to different name lengths and markings.  ls is 1
 set NAMEMIN 40	;# so 2 cols on 80-col screen
@@ -977,12 +958,9 @@ proc bump {ll rows width} {
     return [list $ll $bot]
 }
 
-
-
 #
 # generally useful utility procs: color, pretty print (size, time, shorten text)
 #
-
 
 # (color info gleaned from GNU ls.c)
 #	0=end, 1=bold or brighter, 2=darker, 3=italics, 4=underline, 5=slowly blink, 6=rapidly blink, 7=rev, 8=hidden, 9=crossout
@@ -1002,14 +980,12 @@ proc colorcode {style} {
     return "\u001b\[[string range $style 1 end]m"
 }
 
-
 proc plural {n singular plural {pfx ""}} {
     if {$n<=0} {set txt "---"
     } elseif {$n==1} {set txt "$n $pfx[l10n $singular]"	;# set txt "a $singular" ?
     } else {set txt "$n $pfx[l10n $plural]"}
     return $txt
 }
-
 
 proc displaylen {s} {
     set len 0
@@ -1026,7 +1002,6 @@ proc displaylen {s} {
     }
     return $len
 }
-
 
 set K 1024 ;# maybe you prefer 1000
 
@@ -1050,7 +1025,6 @@ proc kmg {size context} {
     return [string trim $pretty]
 }
 
-
 proc ago {time} {
     global TIME
     set s ""; set u ""
@@ -1066,7 +1040,6 @@ proc ago {time} {
     if {$u != ""} {append s [string index [l10n $u] 0]}
     return $s
 }
-
 
 proc perm {mode} {
     set txt ""
@@ -1137,8 +1110,6 @@ proc iceil { num den } {
     return [expr ($num + $den - 1) / ($den)]
 }
 
-
-
 #
 # execution
 #
@@ -1207,15 +1178,11 @@ proc main {argv {argi 0}} {
     }
 }
 
-
-
 #
 # extensions: change global variables, per-file property control, redefine procs (like vc, shorten, even main)
 #
 
 proc perfile {dir tuple} { return $tuple }
-
-
 
 if {![info exists META] || $META(sl)=="run"} {
     set argi [commandline $argv]
