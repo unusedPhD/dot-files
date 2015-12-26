@@ -14,16 +14,17 @@ Usage: bootstrap.sh [ -a | -debnvgto | -vh ] \n
 \t -v | for version
 \t -h | for help\n"
 
-while getopts ":adebnvgtovh" opt; do
+while getopts ":adebftnvgovh" opt; do
     case $opt in
        a)   ALL=true;;
        d)   DEPENDENCY=true;;
        e)   ENVIRO=true;;
        b)   BASH=true;;
+       f)   FISH=true;;
+       t)   TMUX=true;;
        n)   NEOVIM=true;;
        v)   VIM=true;;
        g)   GIT=true;;
-       t)   TMUX=true;;
        O)   GOLANG=true;;
        b)   BRO=true;;
        v)   echo "$VERSION"; exit 1;;
@@ -36,24 +37,51 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 fi
 
 if [ $ENVIRO ] || [ $ALL ]; then
+    # set all default folders to lowercase
     rm ~/.config/user-dirs.dirs
     rm ~/.config/user-dirs.locale
-    ln -s ~/code/dot-files/config/user-dirs.dirs ~/.config/user-dirs.dirs
-    ln -s ~/code/dot-files/config/user-dirs.locale ~/.config/user-dirs.locale
+    ln -s ~/code/dot-files/env/user-dirs.dirs ~/.config/user-dirs.dirs
+    ln -s ~/code/dot-files/env/user-dirs.locale ~/.config/user-dirs.locale
     cd ~/
     mkdir bin
     mkdir code
+    rm -r Desktop
     mkdir desktop
+    rm -r Documents
     mkdir documents
+    rm -r Downloads
     mkdir downloads
+
+    # add powerline patched fonts
     ln -s ~/code/dot-files/fonts ~/.fonts
     fc-cache -vf ~/.fonts/
+
+    # set caps lock to escape
+    echo "/usr/bin/setxkbmap -option 'caps:swapescape'" >> ~/.profile
 fi
 
 if [ $BASH ] || [ $ALL ]; then
     rm ~/.bashrc
     ln -s ~/code/dot-files/bashrc ~/.bashrc
     pip install powerline-status
+fi
+
+if [ $FISH ] || [ $ALL ]; then
+    sudo apt-get install fish
+    ln -s ~/code/dot-files/fish/config.fish ~/.config/fish/
+    ln -s ~/code/dot-files/fish/alias.fish ~/.config/fish/
+    curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+    omf install bobthefish
+    omf theme bobthefish
+    ln -s ~/code/dot-files/fish/init.fish ~/.config/omf/
+fi
+
+if [ $TMUX ] || [ $ALL ]; then
+    sudo apt-get install tmux
+    ln -s ~/code/dot-files/tmux.conf ~/.tmux.conf
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    # install plugins on first launch of tmux --> <C-a> I
+    echo "alias tmux='tmux -2'" >> ~/.bash_aliases
 fi
 
 if [ $NEOVIM ] || [ $ALL ]; then
@@ -78,14 +106,6 @@ if [ $VIM ] || [ $ALL ]; then
     rm ~/.vimrc
     ln -s ~/code/dot-files/vim/vimrc ~/.vimrc
     ln -s ~/code/dot-files/vim/vimrc.bundles ~/.vimrc.bundles
-fi
-
-if [ $TMUX ] || [ $ALL ]; then
-    sudo apt-get install tmux
-    ln -s ~/code/dot-files/tmux.conf ~/.tmux.conf
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    # install plugins on first launch of tmux --> <C-a> I
-    echo "alias tmux='tmux -2'" >> ~/.bash_aliases
 fi
 
 if [ $GIT ] || [ $ALL ]; then

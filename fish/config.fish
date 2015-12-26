@@ -4,7 +4,7 @@ set -g OMF_PATH $HOME/.local/share/omf
 # Path to your oh-my-fish configuration.
 set -g OMF_CONFIG $HOME/.config/omf
 
-# Path to your oh-my-fish.
+# Path to your fish config dir 
 set -g ALIAS_PATH $HOME/.config/fish
 
 ### Configuration required to load oh-my-fish ###
@@ -15,5 +15,3 @@ set -g ALIAS_PATH $HOME/.config/fish
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
 
-# Load alias definitions
-source $ALIAS_PATH/alias.fish
