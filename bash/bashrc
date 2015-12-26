@@ -148,13 +148,10 @@ alias gh='git hist'
 alias gp='git pull'
 
 # alias for apt
-alias aptsearch='apt-cache search'
 alias aptinstall='sudo apt-get install'
-alias aptstats='apt-cache stats'
-alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'
+alias aptsearch='apt-cache search'
 alias autoremove='sudo apt-get autoremove'
-alias check='sudo apt-get check'
-alias dist-upgrade='sudo apt-get dist-upgrade'
+alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'
 alias update='sudo apt-get update && sudo apt-get dist-upgrade'
 
 alias ..='cd ../'
@@ -171,7 +168,6 @@ alias reboot='sudo /sbin/reboot'
 alias df='df -kTh'
 alias more='less'
 alias wget='wget -c'
-alias slist='sudo vim /etc/apt/sources.list'
 alias shred='shred -n 10 -u -v -z'
 
 # common mispelled commands
@@ -204,8 +200,6 @@ alias la='ls -A'
 alias ll='ls -haltr'
 alias lx='ls -lXB'       # sort by extension
 alias lk='ls -lSr'       # sort by size, biggest last
-alias lc='ls -ltcr'      # sort by and show change time, most recent last
-alias lu='ls -ltur'      # sort by and show access time, most recent last
 alias lt='ls -ltr'       # sort by date, most recent last
 alias lm='ls -al | more' # pipe through 'more'
 alias lr='ls -lR'        # recursive ls
@@ -224,11 +218,11 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 # functions #{{{
 ################################################################################
 
-function h(){
+function h() {
     history | grep $1
 }
 
-function ds(){ # Size of directories in MB
+function ds() { # Size of directories in MB
     echo "size of directories in MB"
     if [ $# -lt 1 ] || [ $# -gt 2 ]; then
         echo "you did not specify a directy, using pwd"
@@ -254,7 +248,7 @@ function lls() { # Counts files, subdirectories and directory size and displays 
     ls -hlAF --group-directories-first
 }
 
-function cp_prog(){ # cp with progress bar (using pv)
+function cpp() { # cp with progress bar (using pv)
     if [ `echo "$2" | grep ".*\/$"` ]; then
         pv "$1" > "$2""$1"
     else
@@ -262,7 +256,7 @@ function cp_prog(){ # cp with progress bar (using pv)
     fi
 }
 
-function cpg(){ # copy and go to dir
+function cpg() { # copy and go to dir
     if [ -d "$2" ];then
         cp $1 $2 && cd $2
     else
@@ -270,7 +264,7 @@ function cpg(){ # copy and go to dir
     fi
 }
 
-function mvg(){ # move and go to dir
+function mvg() { # move and go to dir
     if [ -d "$2" ];then
         mv $1 $2 && cd $2
     else
@@ -278,7 +272,7 @@ function mvg(){ # move and go to dir
     fi
 }
 
-function swap(){ # swap 2 filenames around, if they exist
+function swap() { # swap 2 filenames around, if they exist
     local TMPFILE=tmp.$$
     [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
     [ ! -e $1 ]  && echo "swap: $1 does not exist"  && return 1
@@ -288,7 +282,7 @@ function swap(){ # swap 2 filenames around, if they exist
     mv $TMPFILE "$2"
 }
 
-function findit(){ # find a file with pattern in name
+function findit() { # find a file with pattern in name
     if [ -z ${1} ];then
         echo "requires an argument to search for"
     else
@@ -296,11 +290,11 @@ function findit(){ # find a file with pattern in name
     fi
 }
 
-function grepp(){ # grep by paragraph instead of by line
+function grepp() { # grep by paragraph instead of by line
     [ $# -eq 1 ] && perl -00ne "print if /$1/i" || perl -00ne "print if /$1/i" < "$2";
 }
 
-function apt-history(){ # show apt log history
+function apt-history() { # show apt log history
     case "$1" in
         install)
             cat    /var/log/dpkg.log | grep 'install '
@@ -320,7 +314,7 @@ function apt-history(){ # show apt log history
     esac
 }
 
-function countdown(){ # countdown (set min), and get alert when elapsed
+function countdown() { # countdown (set min), and get alert when elapsed
     case "$1" in -s) shift;; *) set $(($1 * 60));; esac
     local S=" ";
     for i in $(seq "$1" -1 1); do echo -ne "$S\r $i\r"; sleep 1; done;
@@ -328,7 +322,7 @@ function countdown(){ # countdown (set min), and get alert when elapsed
     alert
 }
 
-function note(){ # simple note-taking
+function note() { # simple note-taking
     # if file doesn't exist, create it
     [ -f $HOME/.notes ] || touch $HOME/.notes
     # no arguments, print file
@@ -343,36 +337,49 @@ function note(){ # simple note-taking
     fi
 }
 
-function bk(){ # create a backup of the file
+function bk() { # create a backup of the file
     cp $1 $1_`date +%Y%m%d%H%M`.backup
 }
 
-function extract(){ # automatically extract archives
+function extract() { # automatically extract archives
     if [ -f $1 ] ; then
         case $1 in
-            *.tar.bz2)   tar xvjf "$1"     ;;
-            *.tar.gz)    tar xvzf "$1"     ;;
-            *.bz2)       bunzip2 "$1"      ;;
-            *.rar)       unrar x "$1"      ;;
-            *.gz)        gunzip "$1"       ;;
-            *.tar)       tar xvf "$1"      ;;
-            *.tbz2)      tar xvjf "$1"     ;;
-            *.tgz)       tar xvzf "$1"     ;;
-            *.zip)       unzip "$1"        ;;
-            *.Z)         uncompress "$1"   ;;
-            *.7z)        7z x "$1"         ;;
-            *)           echo "'$1' cannot be extracted via >extract<" ;;
+            *.tar.bz2)  tar xvjf "$1"   ;;
+            *.tar.gz)   tar xvzf "$1"   ;;
+            *.bz2)      bunzip2 "$1"    ;;
+            *.rar)      unrar x "$1"    ;;
+            *.gz)       gunzip "$1"     ;;
+            *.tar)      tar xvf "$1"    ;;
+            *.tbz2)     tar xvjf "$1"   ;;
+            *.tgz)      tar xvzf "$1"   ;;
+            *.zip)      unzip "$1"      ;;
+            *.Z)        uncompress "$1" ;;
+            *.7z)       7z x "$1"       ;;
+            *)          echo "'$1' cannot be extracted via >extract<" ;;
         esac
     else
         echo "'$1' is not a valid file"
     fi
 }
 
-function tarball(){ # create a dated tar.gz archive
+function tarball() { # create a dated tar.gz archive
     tar zcvf "$1"-`date +%Y%m%d`.tar.gz "$1";
 }
 
-function pullout(){ # pull a single file out of a .tar.gz
+function tarlist() { # list contents of archives
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar)       tar tvf "$1"   ;;
+            *.tar.bz2)   tar jtvf "$1"  ;;
+            *.tar.gz)    tar ztvf "$1"  ;;
+            *)           echo "'$1' cannot be viewed via >tarlist<" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+function tarpull() { # pull a single file out of a .tar.gz
     if [ $# -ne 2 ]; then
         echo "need proper arguments:"
         echo "pullout [file] [archive.tar.gz]"
@@ -390,11 +397,7 @@ function pullout(){ # pull a single file out of a .tar.gz
     return 0
 }
 
-# basic encrypt / decrypt
-function encry(){ gpg -ac --no-options "$1"; }
-function decry(){ gpg --no-options "$1"; }
-
-function encrypt(){ # advanced encryption / decryption
+function encrypt() { # advanced encryption / decryption
     err_title="Error"
     err_files="No file selected"
     encrypt="Encrypt"
@@ -428,7 +431,7 @@ function encrypt(){ # advanced encryption / decryption
 }
 alias decrypt='encrypt'
 
-function checksum(){ # check file checksum
+function checksum() { # check file checksum
     action=$1
     shift
     if [[ ( $action == "-c" || $action == "--check" ) && $1 == *.* ]]; then
@@ -475,15 +478,15 @@ function checksum(){ # check file checksum
     esac
 }
 
-function psls(){ # list process for current user
+function psls() { # list process for current user
     ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command
 }
 
-function pp(){ # search processes and display tree
+function pp() { # search processes and display tree
     psls f | awk '!/awk/ && $0~var' var=${1:-".*"} ;
 }
 
-function psgrep(){ # grep search processes
+function psgrep() { # grep search processes
     if [ $# -lt 1 ] || [ $# -gt 1 ]; then
         echo "grep running processes"
         echo "usage: psgrep [process]"
@@ -493,7 +496,7 @@ function psgrep(){ # grep search processes
     fi
 }
 
-function pskill(){ # kill by process name
+function pskill() { # kill by process name
     local pid pname sig="-TERM"   # Default signal.
     if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
         echo "Usage: killps [-SIGNAL] pattern"
@@ -508,7 +511,7 @@ function pskill(){ # kill by process name
     done
 }
 
-function netinfo(){ # netinfo - shows network information for your system
+function netinfo() { # netinfo - shows network information for your system
     echo "--------------- Network Information ---------------"
     /sbin/ifconfig | awk /'inet addr/ {print $2}'
     /sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
