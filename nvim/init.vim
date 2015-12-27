@@ -1,7 +1,7 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-" define a group `vimrc` and initialize.
+" define a generic group
 augroup vimrc
   autocmd!
 augroup END
@@ -268,6 +268,10 @@ vmap > >gv
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" better home/end
+nnoremap B ^
+nnoremap E $
+
 "}}}
 " ------------------------------------------------------------------------------
 " 3.5 F-key actions "{{{
@@ -444,7 +448,7 @@ nnoremap <silent> <leader>y  :<C-u>Unite -no-split -buffer-name=yank -resume -qu
 " search buffer
 nnoremap <silent> <leader>b  :<C-u>Unite -no-split -buffer-name=buffer -resume -quick-match buffer<cr>
 " search lines of current file
-nnoremap <silent> <leader>l  :<C-u>Unite -buffer-name=search_file -resume -start-insert line<CR>
+nnoremap <silent> <leader>l  :<C-u>Unite -start-insert line<CR>
 " grep current dir
 nnoremap <silent> <leader>g  :<C-u>Unite -no-split -silent -buffer-name=ag grep:.<CR>
 
