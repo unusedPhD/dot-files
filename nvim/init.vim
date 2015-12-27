@@ -352,7 +352,7 @@ call g:unite#filters#sorter_default#use(
 \)
 
 if executable('ag')
-    let g:unite_source_rec_async_command = 
+    let g:unite_source_rec_async_command =
         \'ag '
         \'--nocolor '
         \'--follow '
@@ -530,7 +530,7 @@ augroup linters
         autocmd BufWritePost *.vim Neomake vint
     endif
     " go get -u github.com/golang/lint/golint
-    if executable('golint') 
+    if executable('golint')
         autocmd BufWritePost *.go Neomake golint
     endif
 augroup END
@@ -564,7 +564,9 @@ endfunction
 " ------------------------------------------------------------------------------
 " 7.1 Todo "{{{
 " ------------------------------------------------------------------------------
+
 " 1. create README file.
+" 2. add wildmenu
 
 "}}}
 " ------------------------------------------------------------------------------

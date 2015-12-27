@@ -11,11 +11,10 @@ Usage: bootstrap.sh [ -a | -debnvgto | -vh ] \n
 \t -n | set up neovim
 \t -v | set up vim
 \t -g | set up git
-\t -o | set up golang
 \t -v | for version
 \t -h | for help\n"
 
-while getopts ":adebftnvgovh" opt; do
+while getopts ":adebftnvgvh" opt; do
     case $opt in
        a)   ALL=true;;
        d)   DEPENDENCY=true;;
@@ -26,15 +25,76 @@ while getopts ":adebftnvgovh" opt; do
        n)   NEOVIM=true;;
        v)   VIM=true;;
        g)   GIT=true;;
-       O)   GOLANG=true;;
-       b)   BRO=true;;
        v)   echo "$VERSION"; exit 1;;
        h)   echo "$USAGE"; exit 1;;
     esac
 done
 
 if [ $DEPENDENCY ] || [ $ALL ]; then
-    sudo apt-get install git python-dev python-pip python3-dev python3-pip htop build-essential
+
+    sudo apt-get install 
+        git
+        automake
+        cmake
+        bison
+        flex
+        libgeoip-dev
+        libssl-dev
+        g++
+        swig2.0
+        build-essential
+        python-dev
+        python-pip
+        python3-dev
+        python3-pip
+        exuberant-ctags bison
+        shellcheck
+        tidy
+        htop 
+
+    # BRO
+    mkdir -p $HOME/bin/src/
+    cd $HOME/bin/src/
+    wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
+    tar xvzf bro-2.4.1.tar.gz
+    cd bro-2.4.1
+    .configure --prefix=$HOME/bin/bro
+    make
+    make install
+    sudo setcap cap_net_raw,cap_net_admin=eip $HOME/bin/bro/bin/bro
+    sudo setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
+
+    # GO
+    wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz /tmp/
+    cd /tmp/
+    tar xvzf go1.5.2.linux-amd64.tar.gz
+    sudo mv go /usr/local/
+    mkdir -p ~/code/go
+
+    # export to load into path without requiring reload of .profile
+    export GOPATH=$HOME/code/go/
+    export PATH=$PATH:$GOPATH/bin
+    export PATH=$PATH:/usr/local/go/bin
+
+    # NODEJS
+    cd $HOME/bin/src
+    wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz
+    tar xvzf node-v4.2.4-linux-x64.tar.gz
+    mv node-v4.2.4-linux-x64 $HOME/bin/node
+
+    # add custom dir to $PATH
+    {
+        echo "export GOPATH=$HOME/code/go/"
+        echo "export PATH=$PATH:$GOPATH/bin"
+        echo "export PATH=$PATH:/usr/local/go/bin"
+        echo "export PATH=$PATH:$HOME/bin/bro/bin/"
+        echo "export PATH=$PATH:$HOME/bin/node/bin/"
+    } >> ~/.profile
+
+    # linters
+    go get -u github.com/golang/lint/golint
+    npm install -g eslint
+    sudo pip3 install vim-vint
 fi
 
 if [ $ENVIRO ] || [ $ALL ]; then
@@ -120,37 +180,3 @@ if [ $GIT ] || [ $ALL ]; then
     ln -s ~/code/dot-files/gitignore ~/.gitignore
 fi
 
-if [ $GOLANG ] || [ $ALL ]; then
-    # grab latest stable release
-    wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz /tmp/
-    cd /tmp/
-    tar xvzf go1.5.2.linux-amd64.tar.gz
-    sudo mv go /usr/local/
-    mkdir -p ~/code/go
-
-    # add entries for go paths
-    {
-        echo "export GOPATH=$HOME/code/go/"
-        echo "export PATH=$PATH:$GOPATH/bin"
-        echo "export PATH=$PATH:/usr/local/go/bin"
-    } >> ~/.profile
-
-    # export to load into path without requiring reload of .profile
-    export GOPATH=$HOME/code/go/
-    export PATH=$PATH:$GOPATH/bin
-    export PATH=$PATH:/usr/local/go/bin
-
-    # grab common binaries
-    go get -u github.com/golang/lint/golint
-fi
-
-if [ $BRO ] || [ $ALL ]; then
-    sudo apt-get install bison
-    cd /usr/src/
-    sudo wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
-    sudo tar xvzf bro-2.4.1.tar.gz
-    cd bro-2.4.1
-    sudo ./configure --prefix=/opt/bro
-    sudo make
-    sudo make install
-fi
