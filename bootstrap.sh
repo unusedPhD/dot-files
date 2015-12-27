@@ -85,8 +85,8 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
     # add custom dir to $PATH
     {
         echo "export GOPATH=$HOME/code/go/"
-        echo "export PATH=$PATH:$GOPATH/bin"
         echo "export PATH=$PATH:/usr/local/go/bin"
+        echo "export PATH=$PATH:$GOPATH/bin"
         echo "export PATH=$PATH:$HOME/bin/bro/bin/"
         echo "export PATH=$PATH:$HOME/bin/node/bin/"
     } >> ~/.profile
