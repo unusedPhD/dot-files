@@ -62,7 +62,6 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
     ./install
 
     # BRO
-    mkdir -p "$HOME"/bin/src/
     cd "$HOME"/bin/src/
     wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
     tar xvzf bro-2.4.1.tar.gz
@@ -80,11 +79,6 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
     sudo mv go /usr/local/
     mkdir -p ~/code/go
 
-    # export to load into path without requiring reload of .profile
-    export GOPATH=$HOME/code/go/
-    export PATH=$PATH:$GOPATH/bin
-    export PATH=$PATH:/usr/local/go/bin
-
     # NODEJS
     cd "$HOME"/bin/src
     wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz
@@ -99,6 +93,12 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
         echo "export PATH=$PATH:$HOME/bin/bro/bin/"
         echo "export PATH=$PATH:$HOME/bin/node/bin/"
     } >> ~/.profile
+
+    # export to load into path without requiring reload of .profile
+    export GOPATH="$HOME"/code/go/
+    export PATH=$PATH:"$GOPATH"/bin
+    export PATH=$PATH:/usr/local/go/bin
+    export PATH=$PATH:"HOME"/bin/node/bin/
 
     # linters
     go get -u github.com/golang/lint/golint
@@ -137,6 +137,8 @@ if [ $BASH ] || [ $ALL ]; then
 fi
 
 if [ $FISH ] || [ $ALL ]; then
+    sudo apt-add-repository ppa:fish-shell/release-2
+    sudo apt-get update
     sudo apt-get install fish
     ln -s ~/code/dot-files/fish/config.fish ~/.config/fish/
     ln -s ~/code/dot-files/fish/alias.fish ~/.config/fish/
