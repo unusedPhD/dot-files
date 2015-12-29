@@ -42,9 +42,11 @@ Plug 'bling/vim-airline'
 " 1.3 syntax "{{{
 " ------------------------------------------------------------------------------
 
+Plug 'sheerun/vim-polyglot'
 Plug 'mephux/bro.vim'
-Plug 'elubow/cql-vim'
+"Plug 'elubow/cql-vim'
 Plug 'yaunj/vim-yara'
+Plug 'dag/vim-fish'
 "Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
 "}}}
@@ -113,7 +115,6 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'tpope/vim-surround'
 "Plug 'SirVer/ultisnips'
 "Plug 'benekastah/neomake'
-Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/vim-webdevicons'
 
 "}}}

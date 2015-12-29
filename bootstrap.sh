@@ -32,36 +32,45 @@ done
 
 if [ $DEPENDENCY ] || [ $ALL ]; then
 
-    sudo apt-get install 
-        git
-        automake
-        cmake
-        bison
-        flex
-        libgeoip-dev
-        libssl-dev
-        g++
-        swig2.0
-        build-essential
-        python-dev
-        python-pip
-        python3-dev
-        python3-pip
-        exuberant-ctags bison
-        shellcheck
-        tidy
-        htop 
+    sudo apt-get install \
+        git \
+        automake \
+        cmake \
+        bison \
+        flex \
+        libgeoip-dev \
+        libssl-dev \
+        g++ \
+        swig2.0 \
+        build-essential \
+        python-dev \
+        python-pip \
+        python3-dev \
+        python3-pip \
+        exuberant-ctags \
+        bison \
+        shellcheck \
+        tidy \
+        httpie \
+        htop
+
+    # FZF
+    mkdir -p "$HOME"/bin/src/
+    cd "$HOME"/bin/src
+    git clone --depth 1 https://github.com/junegunn/fzf.git
+    cd fzf
+    ./install
 
     # BRO
-    mkdir -p $HOME/bin/src/
-    cd $HOME/bin/src/
+    mkdir -p "$HOME"/bin/src/
+    cd "$HOME"/bin/src/
     wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
     tar xvzf bro-2.4.1.tar.gz
     cd bro-2.4.1
-    .configure --prefix=$HOME/bin/bro
+    .configure --prefix="$HOME"/bin/bro
     make
     make install
-    sudo setcap cap_net_raw,cap_net_admin=eip $HOME/bin/bro/bin/bro
+    sudo setcap cap_net_raw,cap_net_admin=eip "$HOME"/bin/bro/bin/bro
     sudo setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 
     # GO
@@ -77,10 +86,10 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
     export PATH=$PATH:/usr/local/go/bin
 
     # NODEJS
-    cd $HOME/bin/src
+    cd "$HOME"/bin/src
     wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz
     tar xvzf node-v4.2.4-linux-x64.tar.gz
-    mv node-v4.2.4-linux-x64 $HOME/bin/node
+    mv node-v4.2.4-linux-x64 "$HOME"/bin/node
 
     # add custom dir to $PATH
     {
@@ -134,6 +143,12 @@ if [ $FISH ] || [ $ALL ]; then
     curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
     omf install bobthefish
     omf theme bobthefish
+    omf install extract
+    omf install weather
+    omf install fzf
+    wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+    chmod +x jq-linux64
+    sudo mv jq-linux64 /usr/local/bin/
     ln -s ~/code/dot-files/fish/init.fish ~/.config/omf/
     # change default shell to fish
     chsh -s /usr/bin/fish
@@ -180,3 +195,8 @@ if [ $GIT ] || [ $ALL ]; then
     ln -s ~/code/dot-files/gitignore ~/.gitignore
 fi
 
+# NOTES
+# Terminal profile
+#  font: DejaVu Sans Mono for Powerline Book
+#  colours:
+#    palette: Tango
