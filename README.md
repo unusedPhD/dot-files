@@ -6,7 +6,7 @@
     cd dot-files
     git submodule update --init --recursive
 
-optionally setup various components with bootstrap.sh
+setup various components with bootstrap.sh
 
     $ bootstrap.sh -h
 
