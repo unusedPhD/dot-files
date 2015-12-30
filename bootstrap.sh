@@ -1,7 +1,7 @@
 #!/bin/sh
 VERSION="\n bootstrap v0.2.0\n"
 USAGE="
-Usage: bootstrap.sh [ -a | -debnvgto | -vh ] \n
+Usage: bootstrap.sh [ -a ][ -debnvgto ][ -vh ] \n
 \t -a | install all components
 \t -d | apt-get install dependencies
 \t -e | set up general environment
