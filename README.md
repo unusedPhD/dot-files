@@ -10,7 +10,7 @@ setup various components with bootstrap.sh
 
     $ bootstrap.sh -h
 
-    Usage: bootstrap.sh [ -a | -debnvgto | -vh ]
+    Usage: bootstrap.sh [ -a ][ -debnvgto ][ -vh ]
 
          -a | install all components
          -d | apt-get install dependencies
