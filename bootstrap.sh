@@ -56,7 +56,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 
     # FZF
     mkdir -p "$HOME"/bin/src/
-    cd "$HOME"/bin/src
+    cd "$HOME"/bin/
     git clone --depth 1 https://github.com/junegunn/fzf.git
     cd fzf
     ./install
@@ -66,15 +66,15 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
     wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
     tar xvzf bro-2.4.1.tar.gz
     cd bro-2.4.1
-    .configure --prefix="$HOME"/bin/bro
+    "$HOME"/bin/src/bro-2.4.1/configure --prefix="$HOME"/bin/bro
     make
     make install
     sudo setcap cap_net_raw,cap_net_admin=eip "$HOME"/bin/bro/bin/bro
     sudo setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 
     # GO
-    wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz /tmp/
     cd /tmp/
+    wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
     tar xvzf go1.5.2.linux-amd64.tar.gz
     sudo mv go /usr/local/
     mkdir -p ~/code/go
