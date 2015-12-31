@@ -3,7 +3,7 @@ scriptencoding utf-8
 
 " define a generic group
 augroup vimrc
-  autocmd!
+    autocmd!
 augroup END
 
 " ==============================================================================
@@ -19,9 +19,9 @@ augroup END
 " ------------------------------------------------------------------------------
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd vimrc VimEnter * PlugInstall | source $MYVIMRC
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd vimrc VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 call g:plug#begin('~/.config/nvim/bundle')
@@ -123,7 +123,7 @@ Plug 'vim-scripts/vim-webdevicons'
 " ------------------------------------------------------------------------------
 
 if filereadable(expand('~/.config/nvim/bundles.local'))
-  source ~/.config/nvim/init.local
+    source ~/.config/nvim/bundles.local
 endif
 
 call g:plug#end()
@@ -139,7 +139,6 @@ call g:plug#end()
 " 2.1 sensible defaults "{{{
 " ------------------------------------------------------------------------------
 
-set shell=/bin/bash
 set relativenumber
 set number
 "set showmode                  " Always show mode
@@ -150,7 +149,7 @@ set number
 "set noswapfile                " New buffers will be loaded without creating a swapfile
 "set hidden                    " Enables to switch between unsaved buffers and keep undo history
 "set clipboard+=unnamed        " Allow to use system clipboard
-set lazyredraw                " Don't redraw while executing macros (better performance)
+set lazyredraw                 " Don't redraw while executing macros (better performance)
 "set showmatch                 " Show matching brackets when text indicator is over them
 "set matchtime=2               " How many tenths of a second to blink when matching brackets
 "set nostartofline             " Prevent cursor from moving to beginning of line when switching buffers
@@ -318,6 +317,7 @@ cnoremap qq qall
 " 3.7 terminal "{{{
 " ------------------------------------------------------------------------------
 
+set shell=/bin/zsh
 " exit insert mode
 tnoremap <F12> <c-\><C-n>
 
@@ -416,10 +416,13 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_time_format = ' '
-call g:vimfiler#custom#profile('default', 'context', {
-      \ 'safe' : 0,
-      \ 'auto-cd' : 1,
-\ })
+call g:vimfiler#custom#profile(
+    \'default',
+    \'context', {
+        \'safe' : 0,
+        \'auto-cd' : 1,
+    \}
+\)
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -456,11 +459,11 @@ nnoremap <silent> <leader>g  :<C-u>Unite -no-split -silent -buffer-name=ag grep:
 " custom mappings for the unite buffer
 autocmd vimrc FileType unite call s:unite_settings()
 function! s:unite_settings()
-  " play nice with supertab
-  let b:SuperTabDisabled=1
-  " enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+    " play nice with supertab
+    let b:SuperTabDisabled=1
+    " enable navigation with control-j and control-k in insert mode
+    imap <buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
 endfunction
 
 "}}}
@@ -503,9 +506,9 @@ autocmd vimrc VimResized * :wincmd =
 augroup savePosition
     autocmd!
     autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \     execute 'normal! g`"zvzz' |
-        \ endif
+        \if line("'\"") > 0 && line("'\"") <= line("$") |
+        \    execute 'normal! g`"zvzz' |
+        \endif
 augroup END
 
 "}}}

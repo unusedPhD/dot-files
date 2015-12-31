@@ -1,5 +1,5 @@
 # load alias definitions
-source $ALIAS_PATH/alias.fish
+source $HOME/.config/fish/alias.fish
 
 # load local alias definitions
-source $ALIAS_PATH/alias_local.fish
+source $HOME/.config/fish/alias_local.fish
