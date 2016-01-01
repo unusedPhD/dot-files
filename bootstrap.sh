@@ -39,6 +39,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
         bison \
         flex \
         libgeoip-dev \
+        libpcap-dev \
         libssl-dev \
         g++ \
         swig2.0 \
@@ -177,9 +178,21 @@ if [ $NEOVIM ] || [ $ALL ]; then
     sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
     sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
     sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-    mkdir ~/.config/nvim
-    rm ~/.config/nvim/init.vim
+
+    # is neovim already installed?
+    if [ ! -d "$HOME"/.config/nvim ]; then
+        mkdir "$HOME"/.config/nvim
+    else
+        # config already exists, backup file in case it needs to be referenced
+        mv "$HOME"/.config/nvim/init.vim "$HOME"/.config/init.vim.bk
+    fi
+
     ln -s ~/code/dot-files/nvim/init.vim ~/.config/nvim/
+
+    # go tags
+    if [ -f /usr/local/go/bin/go ]; then
+        go get -u github.com/jstemmer/gotags
+    fi
 fi
 
 if [ $VIM ] || [ $ALL ]; then

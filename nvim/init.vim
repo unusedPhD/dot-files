@@ -32,9 +32,9 @@ call g:plug#begin('~/.config/nvim/bundle')
 " ------------------------------------------------------------------------------
 
 Plug 'morhetz/gruvbox'
+Plug 'bling/vim-airline'
 "Plug 'sickill/vim-monokai'
 "Plug 'joshdick/onedark.vim'
-Plug 'bling/vim-airline'
 "Plug 'joshdick/airline-onedark.vim'
 
 "}}}
@@ -44,7 +44,6 @@ Plug 'bling/vim-airline'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'mephux/bro.vim'
-"Plug 'elubow/cql-vim'
 Plug 'yaunj/vim-yara'
 Plug 'dag/vim-fish'
 "Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
@@ -59,8 +58,9 @@ Plug 'Shougo/vimfiler.vim'
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
-"Plug 'majutsushi/tagbar'
-"Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+Plug 'majutsushi/tagbar'
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -585,3 +585,30 @@ endfunction
 
 "}}}
 " ==============================================================================
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
