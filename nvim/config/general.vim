@@ -6,6 +6,7 @@
 " 2.1 sensible defaults "{{{
 " ------------------------------------------------------------------------------
 
+set encoding=utf-8
 set relativenumber
 set number
 "set showmode                  " Always show mode

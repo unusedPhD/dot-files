@@ -1,6 +1,13 @@
+
+" ==============================================================================
+" unite "{{{
+" ==============================================================================
+
 " ------------------------------------------------------------------------------
-" 4.1 unite "{{{
+" plugin settings "{{{
 " ------------------------------------------------------------------------------
+
+scriptencoding utf-8
 
 let g:unite_data_directory = '~/.cache/unite'
 
@@ -69,33 +76,105 @@ call g:unite#custom_source(
 
 
 "}}}
-" ==============================================================================
-" 5.0 plugin mappings "{{{
-" ==============================================================================
-
 " ------------------------------------------------------------------------------
-" 5.1 unite and extensions "{{{
+" plugin mappings "{{{
 " ------------------------------------------------------------------------------
 
-" search current dir
-nnoremap <silent> <leader>fd :<C-u>Unite -no-split -buffer-name=files-current -resume -input= -start-insert file<cr>
-" search project dir
-nnoremap <silent> <leader>fc :<C-u>Unite -no-split -buffer-name=files -resume -input= -start-insert file_rec/async:!<cr>
-nnoremap <silent> <leader>fv :<C-u>Unite -no-split -buffer-name=files -resume -input= -start-insert -default-action=vsplit file_rec/async:!<cr>
-nnoremap <silent> <leader>fh :<C-u>Unite -no-split -buffer-name=files -resume -input= -start-insert -default-action=split file_rec/async:!<cr>
-nnoremap <silent> <leader>ft :<C-u>Unite -no-split -buffer-name=files -resume -input= -start-insert -default-action=tabopen file_rec/async:!<cr>
-" search mru
-nnoremap <silent> <leader>m  :<C-u>Unite -no-split -buffer-name=mru -resume -start-insert file_mru<cr>
-" search outline
-nnoremap <silent> <leader>o  :<C-u>Unite -no-split -buffer-name=outline -resume -auto-preview outline<cr>
-" search yank history
-nnoremap <silent> <leader>y  :<C-u>Unite -no-split -buffer-name=yank -resume -quick-match history/yank<cr>
-" search buffer
-nnoremap <silent> <leader>b  :<C-u>Unite -no-split -buffer-name=buffer -resume -quick-match buffer<cr>
-" search lines of current file
+" The prefix key.
+" nnoremap [unite] <Nop>
+" nmap "\<space>" [unite]
+
+" ------------------------------------------------------------------------------
+" - search current dir
+" ------------------------------------------------------------------------------
+nnoremap <silent> <leader>fd :<C-u>Unite -no-split
+                                       \ -buffer-name=files-current
+                                       \ -resume
+                                       \ -input=
+                                       \ -start-insert file<cr>
+
+" ------------------------------------------------------------------------------
+" - search project dir
+" ------------------------------------------------------------------------------
+
+" open in current window
+nnoremap <silent> <leader>fc :<C-u>Unite -no-split
+                                       \ -buffer-name=files
+                                       \ -resume
+                                       \ -input=
+                                       \ -start-insert
+                                       \ file_rec/async:!<cr>
+" open in new vsplit
+nnoremap <silent> <leader>fv :<C-u>Unite -no-split
+                                       \ -buffer-name=files
+                                       \ -resume
+                                       \ -input=
+                                       \ -start-insert
+                                       \ -default-action=vsplit
+                                       \ file_rec/async:!<cr>
+" open in new split
+nnoremap <silent> <leader>fh :<C-u>Unite -no-split
+                                       \ -buffer-name=files
+                                       \ -resume
+                                       \ -input=
+                                       \ -start-insert
+                                       \ -default-action=split
+                                       \ file_rec/async:!<cr>
+" open in new tab
+nnoremap <silent> <leader>ft :<C-u>Unite -no-split
+                                       \ -buffer-name=files
+                                       \ -resume
+                                       \ -input=
+                                       \ -start-insert
+                                       \ -default-action=tabopen
+                                       \ file_rec/async:!<cr>
+
+" ------------------------------------------------------------------------------
+" - search mru
+" ------------------------------------------------------------------------------
+nnoremap <silent> <leader>m  :<C-u>Unite -no-split
+                                       \ -buffer-name=mru
+                                       \ -resume
+                                       \ -start-insert
+                                       \ file_mru<cr>
+
+" ------------------------------------------------------------------------------
+" - search outline
+" ------------------------------------------------------------------------------
+nnoremap <silent> <leader>o  :<C-u>Unite -no-split
+                                       \ -buffer-name=outline
+                                       \ -auto-preview
+                                       \ outline<cr>
+
+" ------------------------------------------------------------------------------
+" - search yank history
+" ------------------------------------------------------------------------------
+nnoremap <silent> <leader>y  :<C-u>Unite -no-split
+                                       \ -start-insert
+                                       \ history/yank<cr>
+" nnoremap <silent> <leader>y  :<C-u>Unite -no-split -quick-match history/yank<cr>
+
+" ------------------------------------------------------------------------------
+" - search buffer
+" ------------------------------------------------------------------------------
+nnoremap <silent> <leader>b  :<C-u>Unite -no-split
+                                       \ -buffer-name=buffer
+                                       \ -resume
+                                       \ -quick-match
+                                       \ buffer<cr>
+
+" ------------------------------------------------------------------------------
+" - search lines of current file
+" ------------------------------------------------------------------------------
 nnoremap <silent> <leader>l  :<C-u>Unite -start-insert line<CR>
-" grep current dir
-nnoremap <silent> <leader>g  :<C-u>Unite -no-split -silent -buffer-name=ag grep:.<CR>
+
+" ------------------------------------------------------------------------------
+" - grep current dir
+" ------------------------------------------------------------------------------
+nnoremap <silent> <leader>g  :<C-u>Unite -no-split
+                                       \ -silent
+                                       \ -buffer-name=ag
+                                       \ grep:.<CR>
 
 " custom mappings for the unite buffer
 autocmd vimrc FileType unite call s:unite_settings()

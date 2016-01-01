@@ -1,4 +1,14 @@
-"set encoding=utf-8
-"scriptencoding utf-8
+let $VIMPATH=expand('$HOME/.config/nvim')
 
-execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/load.vim'
+function! s:source_file(path)
+    execute 'source' fnameescape($VIMPATH.'/config/'.a:path)
+endfunction
+
+call s:source_file('plug.vim')
+call s:source_file('bindings.vim')
+call s:source_file('utils.vim')
+call s:source_file('ctags.vim')
+call s:source_file('general.vim')
+call s:source_file('plugins/unite.vim')
+call s:source_file('plugins/vimfiler.vim')
+call s:source_file('plugins/deoplete.vim')

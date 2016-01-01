@@ -25,6 +25,7 @@ Plug 'bling/vim-airline'
 "Plug 'joshdick/onedark.vim'
 "Plug 'joshdick/airline-onedark.vim'
 Plug 'jszakmeister/vim-togglecursor'
+
 "}}}
 " ------------------------------------------------------------------------------
 " 1.3 syntax "{{{
@@ -42,7 +43,6 @@ Plug 'dag/vim-fish', { 'for': 'fish' }
 " ------------------------------------------------------------------------------
 
 Plug 'Shougo/vimfiler.vim'
-"Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
@@ -90,17 +90,15 @@ Plug 'gregsexton/gitv'
 " Asynchronous maker and linter (needs linters to work)
 Plug 'benekastah/neomake', { 'on': ['Neomake'] }
 Plug 'Shougo/deoplete.nvim'
-"Plug 'Shougo/neocomplete.vim'
 "Plug 'scrooloose/syntastic'
 "Plug 'terryma/vim-multiple-cursors'
 "Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
-"Plug 'pbrisbin/vim-mkdir'
+Plug 'pbrisbin/vim-mkdir'
 "Plug 'unusedPhD/scratch.vim'
 "Plug 'tpope/vim-unimpaired'
 "Plug 'tpope/vim-surround'
 "Plug 'SirVer/ultisnips'
-"Plug 'benekastah/neomake'
 Plug 'vim-scripts/vim-webdevicons'
 
 "}}}
@@ -115,6 +113,5 @@ endif
 call g:plug#end()
 "}}}
 " ------------------------------------------------------------------------------
-
 
 "}}}
