@@ -1,7 +1,6 @@
 ## Structure
-- [init.vim](init.vim) - References load.vim
+- [init.vim](init.vim) - Nvim initialization and loading of configs
 - [config](./config)/ - Configuration
-  - [load.vim](./config/load.vim) - VIM initialization
   - [plug.vim](./config/plug.vim) - Plugin bundles
   - [plugins](./plugins)/ - Individual plugin configurations
   - [bindings.vim](./config/bindings.vim) - Key bindings

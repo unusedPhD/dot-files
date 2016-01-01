@@ -1,9 +1,11 @@
+scriptencoding utf-8
+
 " ==============================================================================
-" 2.0 basic settings "{{{
+" basic settings "{{{
 " ==============================================================================
 
 " ------------------------------------------------------------------------------
-" 2.1 sensible defaults "{{{
+" sensible defaults "{{{
 " ------------------------------------------------------------------------------
 
 set encoding=utf-8
@@ -18,7 +20,7 @@ set number
 "set hidden                    " Enables to switch between unsaved buffers and keep undo history
 "set clipboard+=unnamed        " Allow to use system clipboard
 set lazyredraw                 " Don't redraw while executing macros (better performance)
-"set showmatch                 " Show matching brackets when text indicator is over them
+set showmatch                  " Show matching brackets when text indicator is over them
 "set matchtime=2               " How many tenths of a second to blink when matching brackets
 "set nostartofline             " Prevent cursor from moving to beginning of line when switching buffers
 "set virtualedit=block         " To be able to select past EOL in visual block mode
@@ -32,14 +34,14 @@ set colorcolumn=80
 
 "}}}
 " ------------------------------------------------------------------------------
-" 2.2 split settings "{{{
+" split settings "{{{
 " ------------------------------------------------------------------------------
 set splitbelow    " horizontal split below current window
 set splitright    " vertical split to the right of current window
 
 "}}}
 " ------------------------------------------------------------------------------
-" 2.3 search settings "{{{
+" search settings "{{{
 " ------------------------------------------------------------------------------
 set ignorecase    " Ignore case by default
 set smartcase     " Make search case sensitive only if it contains uppercase letters
@@ -48,7 +50,7 @@ set nohlsearch    " Don't highlight after search
 
 "}}}
 " ------------------------------------------------------------------------------
-" 2.4 white characters settings "{{{
+" white characters settings "{{{
 " ------------------------------------------------------------------------------
 set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:␣
@@ -56,7 +58,7 @@ set showbreak=↪
 
 "}}}
 " ------------------------------------------------------------------------------
-" 2.5 folding settings "{{{
+" folding settings "{{{
 " ------------------------------------------------------------------------------
 
 "set foldmethod=marker
@@ -64,23 +66,6 @@ set foldmethod=indent
 set foldlevel=1
 set foldnestmax=10 "deepest fold is 10 levels
 set nofoldenable   "dont fold by default
-
-"}}}
-" ------------------------------------------------------------------------------
-" 2.6 theme "{{{
-" ------------------------------------------------------------------------------
-
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
-
-if empty($TMUX)
-    let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
-colorscheme gruvbox
-set background=dark
-let g:airline_theme = 'gruvbox'
-" if (&term =~? 'xterm') || (&term =~? 'screen')
-"     set t_Co=256
-" endif
 
 "}}}
 " ------------------------------------------------------------------------------

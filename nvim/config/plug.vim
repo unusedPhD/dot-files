@@ -1,22 +1,13 @@
-" ==============================================================================
-" 1.0 plugin manager "{{{
-" ==============================================================================
 
-" ------------------------------------------------------------------------------
-" 1.1 plugin initiation "{{{
-" ------------------------------------------------------------------------------
-
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-        \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd vimrc VimEnter * PlugInstall | source $MYVIMRC
-endif
+" ==============================================================================
+" vim-plug - minimalist vim plugin manager
+" https://github.com/junegunn/vim-plug.git "{{{
+" ==============================================================================
 
 call g:plug#begin('$HOME/.config/nvim/bundle')
 
-"}}}
 " ------------------------------------------------------------------------------
-" 1.2 look and feel "{{{
+" look and feel "{{{
 " ------------------------------------------------------------------------------
 
 Plug 'morhetz/gruvbox'
@@ -28,7 +19,7 @@ Plug 'jszakmeister/vim-togglecursor'
 
 "}}}
 " ------------------------------------------------------------------------------
-" 1.3 syntax "{{{
+" syntax "{{{
 " ------------------------------------------------------------------------------
 
 Plug 'sheerun/vim-polyglot'
@@ -39,7 +30,7 @@ Plug 'dag/vim-fish', { 'for': 'fish' }
 
 "}}}
 " ------------------------------------------------------------------------------
-" 1.4 interface improvements "{{{
+" interface improvements "{{{
 " ------------------------------------------------------------------------------
 
 Plug 'Shougo/vimfiler.vim'
@@ -50,7 +41,7 @@ Plug 'majutsushi/tagbar'
 
 "}}}
 " ------------------------------------------------------------------------------
-" 1.5 unite fuzzy searcher "{{{
+" unite fuzzy searcher "{{{
 " ------------------------------------------------------------------------------
 
 " Unite files, buffers, etc. sources
@@ -69,7 +60,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 "}}}
 " ------------------------------------------------------------------------------
-" 1.6 external tools integration plugins "{{{
+" external tools integration plugins "{{{
 " ------------------------------------------------------------------------------
 
 " git changes showed on line numbers
@@ -84,7 +75,7 @@ Plug 'gregsexton/gitv'
 
 "}}}
 " ------------------------------------------------------------------------------
-" 1.7 misc "{{{
+" misc "{{{
 " --------------------------------------------------------------------------
 
 " Asynchronous maker and linter (needs linters to work)
@@ -102,16 +93,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'vim-scripts/vim-webdevicons'
 
 "}}}
-" ------------------------------------------------------------------------------
-" 1.8 end of plugin declaration "{{{
-" ------------------------------------------------------------------------------
-
-if filereadable(expand('~/.config/nvim/bundles.local'))
-    source ~/.config/nvim/bundles.local
-endif
 
 call g:plug#end()
-"}}}
-" ------------------------------------------------------------------------------
 
 "}}}
