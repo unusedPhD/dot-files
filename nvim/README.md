@@ -23,7 +23,6 @@ Key   | Mode | Action
 `<F12>` | Insert | Exit terminal insert mode
 `<leader>` + `ed` | Normal | Open VimFiler in current buffer dir
 `<leader>` + `ep` | Normal | Open VimFiler in project dir
-
 `<leader>` + `fd` | Normal | Unite - search current dir
 `<leader>` + `fc` | Normal | Unite - search project dir, open in current buffer
 `<leader>` + `fv` | Normal | Unite - search project dir, open in vertical split
