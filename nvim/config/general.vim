@@ -8,7 +8,6 @@ scriptencoding utf-8
 " sensible defaults "{{{
 " ------------------------------------------------------------------------------
 
-set encoding=utf-8
 set relativenumber
 set number
 "set showmode                  " Always show mode
@@ -31,6 +30,12 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set colorcolumn=80
+
+" Don't show current mode on last line (vim-airline does this instead)
+set noshowmode
+
+" Minimal number of screen lines to keep above and below the cursor
+set scrolloff=5
 
 "}}}
 " ------------------------------------------------------------------------------

@@ -18,7 +18,8 @@ let g:unite_prompt = '➤ '
 " enable history yank source
 let g:unite_source_history_yank_enable = 1
 
-let g:unite_source_rec_max_cache_files = 99999
+" don't cache, it's fast enough
+let g:unite_source_rec_max_cache_files = 0
 
 let g:unite_source_file_mru_limit = 200
 let g:unite_source_file_mru_filename_format = ':~:.'

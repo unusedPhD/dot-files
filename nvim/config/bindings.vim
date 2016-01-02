@@ -48,6 +48,12 @@ noremap <Leader>v :<C-u>vsplit<CR>
 vmap < <gv
 vmap > >gv
 
+" Use tab for indenting in visual mode
+vnoremap <Tab> >gv|
+vnoremap <S-Tab> <gv
+nnoremap > >>_
+nnoremap < <<_
+
 " Move visual block
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -55,6 +61,9 @@ vnoremap K :m '<-2<CR>gv=gv
 " better home/end
 nnoremap B ^
 nnoremap E $
+
+" Copy to clipboard
+vnoremap <C-c> "*y"
 
 "}}}
 " ------------------------------------------------------------------------------
@@ -64,7 +73,8 @@ nnoremap E $
 " Toggle white characters visibility
 nnoremap <silent> <F2> :set list!<CR> :set list?<CR>
 " Paste mode toggling
-nnoremap <silent> <F3> :set paste!<CR> :set paste?<CR>
+set pastetoggle=<F3>
+" nnoremap <silent> <F3> :set paste!<CR> :set paste?<CR>
 " Toggle search highlight
 nnoremap <silent> <F4> :set nohlsearch!<CR> :set nohlsearch?<CR>
 " Source (reload configuration)

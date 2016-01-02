@@ -33,27 +33,27 @@ done
 if [ $DEPENDENCY ] || [ $ALL ]; then
 
     sudo apt-get install \
-        git \
         automake \
-        cmake \
         bison \
+        build-essential \
+        cmake \
+        exuberant-ctags \
         flex \
+        g++ \
+        git \
+        htop \
+        httpie \
         libgeoip-dev \
         libpcap-dev \
         libssl-dev \
-        g++ \
-        swig2.0 \
-        build-essential \
         python-dev \
         python-pip \
         python3-dev \
         python3-pip \
-        exuberant-ctags \
-        bison \
         shellcheck \
-        tidy \
-        httpie \
-        htop
+        silversearcher-ag \
+        swig2.0 \
+        tidy
 
     # FZF
     mkdir -p "$HOME"/bin/src/
@@ -144,17 +144,18 @@ if [ $FISH ] || [ $ALL ]; then
     ln -s ~/code/dot-files/fish/config.fish ~/.config/fish/
     ln -s ~/code/dot-files/fish/alias.fish ~/.config/fish/
     curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
-    omf install bobthefish
-    omf theme bobthefish
-    omf install extract
-    omf install weather
-    omf install fzf
     wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
     chmod +x jq-linux64
     sudo mv jq-linux64 /usr/local/bin/
     ln -s ~/code/dot-files/fish/init.fish ~/.config/omf/
     # change default shell to fish
     chsh -s /usr/bin/fish
+    echo "launch fish, and run:
+        omf install bobthefish
+        omf theme bobthefish
+        omf install extract
+        omf install weather
+        omf install fzf"
 fi
 
 if [ $TMUX ] || [ $ALL ]; then
