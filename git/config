@@ -11,7 +11,7 @@
     dump = cat-file -p
 [core]
     editor = vim
-    xcludesfile = ~/.gitignore
+    xcludesfile = ~/.config/git/gitignore
 [color]
     branch = auto
     diff = auto
