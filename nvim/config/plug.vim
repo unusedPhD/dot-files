@@ -82,7 +82,7 @@ Plug 'gregsexton/gitv'
 Plug 'benekastah/neomake', { 'on': ['Neomake'] }
 Plug 'Shougo/deoplete.nvim'
 "Plug 'scrooloose/syntastic'
-"Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 "Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'pbrisbin/vim-mkdir'

@@ -29,20 +29,20 @@ let g:loaded_gzip = 1
 
 set encoding=utf-8
 
-set directory=~/.config/nvim/swaps
-if !isdirectory(&directory)
-  call mkdir(&directory)
-endif
+" set directory=~/.config/nvim/swaps
+" if !isdirectory(&directory)
+"   call mkdir(&directory)
+" endif
 
-set backupdir=~/.config/nvim/backups
-if !isdirectory(&backupdir)
-  call mkdir(&backupdir)
-endif
+" set backupdir=~/.config/nvim/backups
+" if !isdirectory(&backupdir)
+"   call mkdir(&backupdir)
+" endif
 
-if has('persistent_undo')
-  set undodir=~/.config/nvim/undos
-  set undofile
-  if !isdirectory(&undodir)
-    call mkdir(&undodir)
-  endif
-endif
+" if has('persistent_undo')
+"   set undodir=~/.config/nvim/undos
+"   set undofile
+"   if !isdirectory(&undodir)
+"     call mkdir(&undodir)
+"   endif
+" endif

@@ -1,6 +1,3 @@
-[submodule "irssi/weed"]
-	path = irssi/weed
-	url = git@github.com:ronilaukkarinen/weed.git
 [submodule "fonts/powerline"]
 	path = fonts/powerline
 	url = git@github.com:powerline/fonts.git
