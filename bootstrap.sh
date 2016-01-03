@@ -1,7 +1,7 @@
 #!/bin/sh
-VERSION="\n bootstrap v0.2.0\n"
+VERSION="\n bootstrap v0.3.0 \n"
 USAGE="
-Usage: bootstrap.sh [ -a ][ -debnvgto ][ -vh ] \n
+Usage: bootstrap.sh [ -a ][ -debftnvg ][ -vh ] \n
 \t -a | install all components
 \t -d | apt-get install dependencies
 \t -e | set up general environment
@@ -33,6 +33,8 @@ done
 if [ $DEPENDENCY ] || [ $ALL ]; then
 
     sudo apt-get install \
+        autoconf \
+        autotools-dev \
         automake \
         bison \
         build-essential \
@@ -46,12 +48,15 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
         libgeoip-dev \
         libpcap-dev \
         libssl-dev \
+        libtool \
+        libtool-bin \
         python-dev \
         python-pip \
         python3-dev \
         python3-pip \
         shellcheck \
         silversearcher-ag \
+        subversion \
         swig2.0 \
         tidy
 
