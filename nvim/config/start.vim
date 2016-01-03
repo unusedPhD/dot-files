@@ -1,10 +1,13 @@
-if has('vim_starting')
+
+if has ('vim_starting')
 
     " download plug if not found
     if empty(glob('~/.config/nvim/autoload/plug.vim'))
         silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-            \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd vimrc VimEnter * PlugInstall | source $MYVIMRC
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        augroup plug
+            autocmd VimEnter * PlugInstall | source $MYVIMRC
+        augroup END
     endif
 
 endif
@@ -29,18 +32,8 @@ let g:loaded_gzip = 1
 
 set encoding=utf-8
 
-" set directory=~/.config/nvim/swaps
-" if !isdirectory(&directory)
-"   call mkdir(&directory)
-" endif
-
-" set backupdir=~/.config/nvim/backups
-" if !isdirectory(&backupdir)
-"   call mkdir(&backupdir)
-" endif
-
 " if has('persistent_undo')
-"   set undodir=~/.config/nvim/undos
+"   set undodir=~/.local/share/nvim/undos
 "   set undofile
 "   if !isdirectory(&undodir)
 "     call mkdir(&undodir)

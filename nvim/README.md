@@ -1,11 +1,12 @@
 ## Structure
 - [init.vim](init.vim) - Nvim initialization and loading of configs
 - [config](./config)/ - Configuration
+  - [start.vim](./config/start.vim) - Initiate nvim
   - [plug.vim](./config/plug.vim) - Plugin bundles
   - [plugins](./plugins)/ - Individual plugin configurations
   - [bindings.vim](./config/bindings.vim) - Key bindings
   - [utils.vim](./config/utils.vim) - Commands and functions
-  - [general.vim](./config/general.vim) - VIM general configuration
+  - [general.vim](./config/general.vim) - NVIM general configuration
 
 
 ## Custom Key bindings

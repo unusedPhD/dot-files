@@ -55,6 +55,10 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
         swig2.0 \
         tidy
 
+    # ADD POWERLINE PATCHED FONTS
+    ln -s ~/code/dot-files/fonts ~/.local/share/fonts
+    fc-cache -vf ~/.local/share/fonts/
+
     # FZF
     mkdir -p "$HOME"/bin/src/
     cd "$HOME"/bin/
@@ -86,6 +90,11 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
     tar xvzf node-v4.2.4-linux-x64.tar.gz
     mv node-v4.2.4-linux-x64 "$HOME"/bin/node
 
+    # JQ
+    wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+    chmod +x jq-linux64
+    sudo mv jq-linux64 /usr/local/bin/
+
     # add custom dir to $PATH
     {
         echo "export GOPATH=\$HOME/code/go/"
@@ -110,9 +119,7 @@ fi
 if [ $ENVIRO ] || [ $ALL ]; then
     # set all default folders to lowercase
     rm ~/.config/user-dirs.dirs
-    rm ~/.config/user-dirs.locale
     ln -s ~/code/dot-files/env/user-dirs.dirs ~/.config/user-dirs.dirs
-    ln -s ~/code/dot-files/env/user-dirs.locale ~/.config/user-dirs.locale
     cd ~/
     mkdir bin
     mkdir code
@@ -122,10 +129,6 @@ if [ $ENVIRO ] || [ $ALL ]; then
     mkdir documents
     rm -r Downloads
     mkdir downloads
-
-    # add powerline patched fonts
-    ln -s ~/code/dot-files/fonts ~/.fonts
-    fc-cache -vf ~/.fonts/
 
     # set caps lock to escape
     echo "/usr/bin/setxkbmap -option 'caps:swapescape'" >> ~/.profile
@@ -141,15 +144,12 @@ if [ $FISH ] || [ $ALL ]; then
     sudo apt-add-repository ppa:fish-shell/release-2
     sudo apt-get update
     sudo apt-get install fish
-    ln -s ~/code/dot-files/fish/config.fish ~/.config/fish/
-    ln -s ~/code/dot-files/fish/alias.fish ~/.config/fish/
-    curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
-    wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
-    chmod +x jq-linux64
-    sudo mv jq-linux64 /usr/local/bin/
-    ln -s ~/code/dot-files/fish/init.fish ~/.config/omf/
+    ln -s ~/code/dot-files/fish/config.fish ~/.config/fish/config.fish
+    ln -s ~/code/dot-files/fish/alias.fish ~/.config/fish/alias.fish
     # change default shell to fish
     chsh -s /usr/bin/fish
+    ln -s ~/code/dot-files/fish/init.fish ~/.config/omf/
+    curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
     echo "launch fish, and run:
         omf install bobthefish
         omf theme bobthefish
@@ -181,14 +181,12 @@ if [ $NEOVIM ] || [ $ALL ]; then
     sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
 
     # is neovim already installed?
-    if [ ! -d "$HOME"/.config/nvim ]; then
-        mkdir "$HOME"/.config/nvim
-    else
+    if [ -d "$HOME"/.config/nvim ]; then
         # config already exists, backup file in case it needs to be referenced
-        mv "$HOME"/.config/nvim/init.vim "$HOME"/.config/init.vim.bk
+        mv "$HOME"/.config/nvim/ "$HOME"/.config/nvim.old
     fi
 
-    ln -s ~/code/dot-files/nvim/init.vim ~/.config/nvim/
+    ln -s ~/code/dot-files/nvim ~/.config/nvim
 
     # go tags
     if [ -f /usr/local/go/bin/go ]; then
@@ -205,10 +203,13 @@ fi
 
 if [ $GIT ] || [ $ALL ]; then
     sudo apt-get install git
-    rm ~/.gitconfig
-    rm ~/.gitignore
-    ln -s ~/code/dot-files/gitconfig ~/.gitconfig
-    ln -s ~/code/dot-files/gitignore ~/.gitignore
+    if [ -f ~/.gitconfig ]; then
+        rm ~/.gitconfig
+    fi
+    if [ -f ~/.gitignore ]; then
+        rm ~/.gitignore
+    fi
+    ln -s ~/code/dot-files/git ~/.config/git
 fi
 
 # NOTES
