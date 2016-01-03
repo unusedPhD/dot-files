@@ -97,11 +97,14 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 
     # add custom dir to $PATH
     {
+        echo "export XDG_CONFIG_HOME=\$HOME/.config"
+        echo "export XDG_DATA_HOME=\$HOME/.local/share"
         echo "export GOPATH=\$HOME/code/go/"
-        echo "export PATH=\$PATH:/usr/local/go/bin"
         echo "export PATH=\$PATH:\$GOPATH/bin"
+        echo "export PATH=\$PATH:/usr/local/go/bin"
         echo "export PATH=\$PATH:\$HOME/bin/bro/bin/"
         echo "export PATH=\$PATH:\$HOME/bin/node/bin/"
+        echo "export HTTPIE_CONFIG_DIR=\$XDG_CONFIG_HOME/httpie"
     } >> ~/.profile
 
     # export to load into path without requiring reload of .profile
