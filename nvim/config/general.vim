@@ -74,5 +74,24 @@ set nofoldenable   "dont fold by default
 
 "}}}
 " ------------------------------------------------------------------------------
+" wildmenu "{{{
+" ------------------------------------------------------------------------------
+
+set wildmenu
+set wildmode=longest:full
+set wildignore+=*.hg,*.git,*.svn                 "Version Controls
+set wildignore+=*.aux,*.out,*.toc                "Latex Indermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   "Binary Imgs
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files
+set wildignore+=*.spl                            "Compiled spelling world list
+set wildignore+=*.sw?                            "Vim swap files
+set wildignore+=*.DS_Store                       "OSX SHIT
+set wildignore+=*.luac                           "Lua byte code
+set wildignore+=*migrations                      "Django migrations
+set wildignore+=*.pyc                            "Python Object codes
+set wildignore+=*.orig                           "Merge resolution files
+
+"}}}
+" ------------------------------------------------------------------------------
 
 "}}}

@@ -35,10 +35,10 @@ call g:unite#filters#sorter_default#use(
 
 if executable('ag')
     let g:unite_source_rec_async_command =
-        \'ag '
-        \'--nocolor '
-        \'--follow '
-        \'--nogroup '
+        \'ag ' .
+        \'--nocolor ' .
+        \'--follow ' .
+        \'--nogroup ' .
         \'-g ""'
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts =

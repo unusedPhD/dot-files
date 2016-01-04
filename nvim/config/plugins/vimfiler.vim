@@ -13,6 +13,8 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_time_format = ' '
+let g:vimfiler_ignore_filters = ['matcher_ignore_wildignore']
+
 call g:vimfiler#custom#profile(
     \'default',
     \'context', {
