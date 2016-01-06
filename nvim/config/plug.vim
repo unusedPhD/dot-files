@@ -97,3 +97,5 @@ Plug 'vim-scripts/vim-webdevicons'
 call g:plug#end()
 
 "}}}
+
+" vim: foldmethod=marker

@@ -120,3 +120,4 @@ tnoremap <F12> <c-\><C-n>
 
 "}}}
 
+" vim: foldmethod=marker

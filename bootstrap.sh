@@ -56,7 +56,6 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
         python3-pip \
         shellcheck \
         silversearcher-ag \
-        subversion \
         swig2.0 \
         tidy
 
@@ -75,6 +74,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
     cd "$HOME"/bin/src/
     wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
     tar xvzf bro-2.4.1.tar.gz
+    rm bro-2.4.1.tar.gz
     cd bro-2.4.1
     "$HOME"/bin/src/bro-2.4.1/configure --prefix="$HOME"/bin/bro
     make
@@ -102,18 +102,25 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 
     # add custom dir to $PATH
     {
+        echo "export EDITOR=/usr/bin/vim"
         echo "export XDG_CONFIG_HOME=\$HOME/.config"
         echo "export XDG_DATA_HOME=\$HOME/.local/share"
-        echo "export GOPATH=\$HOME/code/go/"
+        echo "export XDG_CACHE_HOME=\$HOME/.cache"
+        #echo "XDG_RUNTIME_DIR=\"/run/user/\$USER\""
+        #echo "XDG_CONFIG_DIRS=\"/etc/xdg\""
+        #echo "XDG_DATA_DIRS=\"/usr/local/share:/usr/share\""
+        echo "export GOPATH=\"\$HOME/code/go/\""
         echo "export PATH=\$PATH:\$GOPATH/bin"
         echo "export PATH=\$PATH:/usr/local/go/bin"
         echo "export PATH=\$PATH:\$HOME/bin/bro/bin/"
         echo "export PATH=\$PATH:\$HOME/bin/node/bin/"
+        echo "export NPM_CONFIG_USERCONFIG=\$XDG_CONFIG_HOME/npm/config"
         echo "export HTTPIE_CONFIG_DIR=\$XDG_CONFIG_HOME/httpie"
     } >> ~/.profile
 
     # export to load into path without requiring reload of .profile
     export GOPATH="$HOME"/code/go/
+    export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/config
     export PATH=$PATH:"$GOPATH"/bin
     export PATH=$PATH:/usr/local/go/bin
     export PATH=$PATH:"HOME"/bin/node/bin/
@@ -225,3 +232,6 @@ fi
 #  font: DejaVu Sans Mono for Powerline Book
 #  colours:
 #    palette: Tango
+# if installing byobu, ~/.byobu can be moved to ~/.config/byobu/
+# if installing zsh, echo 'export ZDOTDIR="$HOME/.config/zsh"' > /etc/zsh/zshenv
+

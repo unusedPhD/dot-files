@@ -95,3 +95,5 @@ set wildignore+=*.orig                           "Merge resolution files
 " ------------------------------------------------------------------------------
 
 "}}}
+
+" vim: foldmethod=marker
