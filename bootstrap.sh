@@ -102,7 +102,8 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 
     # add custom dir to $PATH
     {
-        echo "export EDITOR=/usr/bin/vim"
+        echo "export EDITOR=\"/usr/bin/vim\""
+        echo "export LESSHISTFILE=\"/dev/null\""
         echo "export XDG_CONFIG_HOME=\$HOME/.config"
         echo "export XDG_DATA_HOME=\$HOME/.local/share"
         echo "export XDG_CACHE_HOME=\$HOME/.cache"
