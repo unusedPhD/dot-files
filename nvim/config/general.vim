@@ -41,6 +41,7 @@ set scrolloff=5
 " ------------------------------------------------------------------------------
 " split settings "{{{
 " ------------------------------------------------------------------------------
+
 set splitbelow    " horizontal split below current window
 set splitright    " vertical split to the right of current window
 
@@ -48,6 +49,7 @@ set splitright    " vertical split to the right of current window
 " ------------------------------------------------------------------------------
 " search settings "{{{
 " ------------------------------------------------------------------------------
+
 set ignorecase    " Ignore case by default
 set smartcase     " Make search case sensitive only if it contains uppercase letters
 set wrapscan      " Search again from top when reached the bottom
@@ -57,6 +59,7 @@ set nohlsearch    " Don't highlight after search
 " ------------------------------------------------------------------------------
 " white characters settings "{{{
 " ------------------------------------------------------------------------------
+
 set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:␣
 set showbreak=↪

@@ -1,61 +1,81 @@
+"  map     -> recursive key mapping
+"  noremap -> non-recursive key mapping
+"
+"   :map j gg
+"   :map Q j
+"   :noremap W j
+"
+"   j = gg
+"   Q = gg
+"   W = j
 
 " ==============================================================================
 " mapping settings "{{{
 " ==============================================================================
 
 " ------------------------------------------------------------------------------
-" setting leader "{{{
+" leader "{{{
 " ------------------------------------------------------------------------------
+
 let g:mapleader="\<space>"
 
 "}}}
 " -----------------------------------------------------
-" 3.2 Disabling arrow keys, space key, exmode enter "{{{
-" with Q key, help with F1, etc.
+" disable/remap arrow keys "{{{
 " -----------------------------------------------------
 
-"nnoremap <up> <NOP>
-"nnoremap <down> <NOP>
-"nnoremap <left> <NOP>
-"nnoremap <right> <NOP>
-"nnoremap <bs> <NOP>
-"nnoremap <delete> <NOP>
-"inoremap <up> <NOP>
-"inoremap <down> <NOP>
-"inoremap <left> <NOP>
-"inoremap <right> <NOP>
-"nnoremap <Space> <NOP>
-"inoremap <F1> <NOP>
-"nnoremap <F1> <NOP>
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
+" Get off my lawn
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>
+
+" navigate  windows
+" nnoremap <Up>   <C-W>k
+" nnoremap <Down> <C-W>j
+" nnoremap <Left> <C-W>h
+" nnoremap <Right> <C-W>l
 
 "}}}
 " ------------------------------------------------------------------------------
-" split "{{{
+" splits "{{{
 " ------------------------------------------------------------------------------
 
-"" Split
+" create splits
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
+
+"}}}
+" ------------------------------------------------------------------------------
+" tabs "{{{
+" ------------------------------------------------------------------------------
+
+" normal mode tab navigation
+nnoremap <tab> gt
+nnoremap <s-tab> gT
 
 "}}}
 " ------------------------------------------------------------------------------
 " common tasks "{{{
 " ------------------------------------------------------------------------------
 
-"" Vmap for maintain Visual Mode after shifting > and <
+" insert and visual mode escape
+inoremap fj <esc>
+inoremap jf <esc>
+vnoremap fj <esc>
+vnoremap jf <esc>
+
+" visual mode, maintain > and < after shift
 vmap < <gv
 vmap > >gv
 
-" Use tab for indenting in visual mode
+" use tab for indenting in visual mode
 vnoremap <Tab> >gv|
 vnoremap <S-Tab> <gv
 nnoremap > >>_
 nnoremap < <<_
 
-" Move visual block
+" move visual block
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -63,7 +83,7 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap B ^
 nnoremap E $
 
-" Copy to clipboard
+" copy to clipboard
 vnoremap <C-c> "*y"
 
 "}}}
@@ -71,14 +91,13 @@ vnoremap <C-c> "*y"
 " F-key actions "{{{
 " ------------------------------------------------------------------------------
 
-" Toggle white characters visibility
+" toggle white characters visibility
 nnoremap <silent> <F2> :set list!<CR> :set list?<CR>
-" Paste mode toggling
+" paste mode toggling
 set pastetoggle=<F3>
-" nnoremap <silent> <F3> :set paste!<CR> :set paste?<CR>
-" Toggle search highlight
-nnoremap <silent> <F4> :set nohlsearch!<CR> :set nohlsearch?<CR>
-" Source (reload configuration)
+" clear search highlight
+nnoremap <silent> <F4> :noh<CR><CR>
+" source (reload configuration)
 nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
 " terminal: exit insert mode
 "tnoremap <F12> <c-\><C-n>
@@ -88,7 +107,7 @@ nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
 " Command abbreviations and mappings "{{{
 " ------------------------------------------------------------------------------
 
-" save having to hit shift
+" command mode save having to hit shift
 nnoremap ; :
 
 " typo alias
