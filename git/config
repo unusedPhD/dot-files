@@ -10,7 +10,7 @@
     type = cat-file -t
     dump = cat-file -p
 [core]
-    editor = vim
+    editor = nvim
     xcludesfile = ~/.config/git/gitignore
 [color]
     branch = auto
