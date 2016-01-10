@@ -20,14 +20,14 @@ autocmd vimrc VimResized * :wincmd =
 " ------------------------------------------------------------------------------
 
 " return to last position when reopening files
-function! g:SetCursorPosition()
-    if &filetype !~? 'svn\|commit\c'
-        if line("'\"") > 0 && line("'\"") <= line('$') |
-            execute 'normal! g`"zvzz' |
-        endif
-    end
-endfunction
-autocmd vimrc BufReadPost * call SetCursorPosition()
+" function! g:SetCursorPosition()
+"     if &filetype !~? 'svn\|commit\c'
+"         if line("'\"") > 0 && line("'\"") <= line('$') |
+"             execute 'normal! g`"zvzz' |
+"         endif
+"     end
+" endfunction
+" autocmd vimrc BufReadPost * call SetCursorPosition()
 
 "}}}
 " ------------------------------------------------------------------------------

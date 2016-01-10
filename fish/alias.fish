@@ -8,7 +8,7 @@ alias 4.   "cd ../../../"
 
 # ls
 alias l  "ls -1"
-alias ll "ls -haltr"
+alias ll "ls -hal"
 
 # git
 alias gs "git status"

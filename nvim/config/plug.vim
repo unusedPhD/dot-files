@@ -38,6 +38,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
+Plug 'easymotion/vim-easymotion'
+Plug 'kopischke/vim-stay'
 
 "}}}
 " ------------------------------------------------------------------------------
