@@ -140,6 +140,4 @@ tnoremap <F12> <c-\><C-n>
 
 "}}}
 
-nmap s <Plug>(easymotion-s)
-
 " vim: foldmethod=marker

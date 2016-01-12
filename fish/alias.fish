@@ -27,3 +27,5 @@ alias clera "clear"
 alias celar "clear"
 alias mann "man"
 
+# TabStop 4 for less
+alias less "less -x4"
