@@ -129,6 +129,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 
     # linters
     go get -u github.com/golang/lint/golint
+    go get -u golang.org/x/tools/cmd/goimports
     npm install -g eslint
     sudo pip3 install vim-vint
 fi

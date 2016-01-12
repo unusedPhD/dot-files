@@ -23,6 +23,7 @@ Plug 'jszakmeister/vim-togglecursor'
 " ------------------------------------------------------------------------------
 
 Plug 'sheerun/vim-polyglot'
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'mephux/bro.vim', { 'for': 'bro' }
 Plug 'yaunj/vim-yara', { 'for': 'yara' }
 Plug 'dag/vim-fish', { 'for': 'fish' }
@@ -93,6 +94,7 @@ Plug 'pbrisbin/vim-mkdir'
 "Plug 'tpope/vim-surround'
 "Plug 'SirVer/ultisnips'
 Plug 'vim-scripts/vim-webdevicons'
+Plug 'unusedPhD/vim-simple-todo'
 
 "}}}
 

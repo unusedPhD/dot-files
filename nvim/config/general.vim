@@ -10,23 +10,23 @@ scriptencoding utf-8
 
 set relativenumber
 set number
-"set showmode                  " Always show mode
-"set showcmd                   " Show commands as you type them
-"set textwidth=120             " Text width is 120 characters
-"set cmdheight=1               " Command line height
-"set pumheight=10              " Completion window max size
-"set noswapfile                " New buffers will be loaded without creating a swapfile
-"set hidden                    " Enables to switch between unsaved buffers and keep undo history
-"set clipboard+=unnamed        " Allow to use system clipboard
-set lazyredraw                 " Don't redraw while executing macros (better performance)
-set showmatch                  " Show matching brackets when text indicator is over them
-"set matchtime=2               " How many tenths of a second to blink when matching brackets
-"set nostartofline             " Prevent cursor from moving to beginning of line when switching buffers
-"set virtualedit=block         " To be able to select past EOL in visual block mode
-"set nojoinspaces              " No extra space when joining a line which ends with . ? !
-"set scrolloff=5               " Scroll when closing to top or bottom of the screen
-"set updatetime=1000           " Update time used to create swap file or other things
-set expandtab
+" set showmode                  " Always show mode
+" set showcmd                   " Show commands as you type them
+set textwidth=120             " Text width is 120 characters
+" set cmdheight=1               " Command line height
+" set pumheight=10              " Completion window max size
+" set noswapfile                " New buffers will be loaded without creating a swapfile
+" set hidden                    " Enables to switch between unsaved buffers and keep undo history
+" set clipboard+=unnamed        " Allow to use system clipboard
+set lazyredraw                  " Don't redraw while executing macros (better performance)
+set showmatch                   " Show matching brackets when text indicator is over them
+" set matchtime=2               " How many tenths of a second to blink when matching brackets
+" set nostartofline             " Prevent cursor from moving to beginning of line when switching buffers
+" set virtualedit=block         " To be able to select past EOL in visual block mode
+" set nojoinspaces              " No extra space when joining a line which ends with . ? !
+" set scrolloff=5               " Scroll when closing to top or bottom of the screen
+" set updatetime=1000           " Update time used to create swap file or other things
+" set expandtab
 set tabstop=4
 set shiftwidth=4
 set colorcolumn=80
