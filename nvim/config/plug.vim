@@ -41,6 +41,8 @@ Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'kopischke/vim-stay'
+" nyaovim plugins
+Plug 'rhysd/nyaovim-markdown-preview' , { 'for': 'markdown' }
 
 "}}}
 " ------------------------------------------------------------------------------

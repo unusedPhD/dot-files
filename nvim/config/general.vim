@@ -35,7 +35,7 @@ set colorcolumn=80
 set noshowmode
 
 " Minimal number of screen lines to keep above and below the cursor
-set scrolloff=5
+set scrolloff=7
 
 "}}}
 " ------------------------------------------------------------------------------
