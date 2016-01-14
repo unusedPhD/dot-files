@@ -10,7 +10,12 @@
 
   let g:deoplete#sources#go = 'vim-go'
 
-" Movement within 'ins-completion-menu'
+" }}}
+" ------------------------------------------------------------------------------
+" plugin mappings "{{{
+" ------------------------------------------------------------------------------
+
+" movement within 'ins-completion-menu'
   imap <expr><C-j>   pumvisible() ? "\<C-n>" : "\<C-j>"
   imap <expr><C-k>   pumvisible() ? "\<C-p>" : "\<C-k>"
 
