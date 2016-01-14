@@ -1,5 +1,6 @@
 " on nvim initiation
   if has ('vim_starting')
+
     " download plug if not found
       if empty(glob('~/.config/nvim/autoload/plug.vim'))
           silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -27,26 +28,27 @@
       let g:loaded_zip = 1
       let g:loaded_zipPlugin = 1
 
-  endif
-
-  if has("multi_byte")
-      if &termencoding == ""
-          let &termencoding = &encoding
+    " set encodings
+      if has('multi_byte')
+          if &termencoding ==# ''
+              let &termencoding = &encoding
+          endif
+          set encoding=utf-8
+          setglobal fileencoding=utf-8
       endif
-      set encoding=utf-8
-      setglobal fileencoding=utf-8
+
+    " share history between sessions
+      augroup shada
+          autocmd!
+          autocmd CursorHold * if exists(':rshada') | rshada | wshada | endif
+      augroup END
+
+    " if has('persistent_undo')
+    "     set undodir=~/.local/share/nvim/undos
+    "     set undofile
+    "     if !isdirectory(&undodir)
+    "         call mkdir(&undodir)
+    "     endif
+    " endif
+
   endif
-
-" if has('persistent_undo')
-"   set undodir=~/.local/share/nvim/undos
-"   set undofile
-"   if !isdirectory(&undodir)
-"     call mkdir(&undodir)
-"   endif
-" endif
-
-" share histories between sessions
-  augroup shada
-      autocmd!
-      autocmd CursorHold * if exists(':rshada') | rshada | wshada | endif
-  augroup END
