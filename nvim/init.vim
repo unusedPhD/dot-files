@@ -17,5 +17,6 @@ call s:source_file('plugins/unite.vim')
 call s:source_file('plugins/vim-easytags.vim')
 call s:source_file('plugins/vim-go.vim')
 call s:source_file('plugins/vim-polyglot.vim')
+call s:source_file('plugins/vim-simple-todo.vim')
 call s:source_file('plugins/vimfiler.vim')
 

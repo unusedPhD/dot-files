@@ -11,9 +11,9 @@
 " ------------------------------------------------------------------------------
 
   Plug 'morhetz/gruvbox'
-  Plug 'bling/vim-airline'
 " Plug 'sickill/vim-monokai'
 " Plug 'joshdick/onedark.vim'
+  Plug 'vim-airline/vim-airline'
 " Plug 'joshdick/airline-onedark.vim'
   Plug 'jszakmeister/vim-togglecursor'
 
@@ -34,13 +34,21 @@
 " interface improvements "{{{
 " ------------------------------------------------------------------------------
 
+" dir navigation
   Plug 'Shougo/vimfiler.vim'
-  Plug 'christoomey/vim-tmux-navigator'
+" ctag creation and display
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-easytags'
   Plug 'majutsushi/tagbar'
   Plug 'easymotion/vim-easymotion'
+" maintain state of fold, cursor position when re-opening files  
   Plug 'kopischke/vim-stay'
+" async autocomplete
+  Plug 'Shougo/deoplete.nvim'
+" sublime-text like functionality
+  Plug 'terryma/vim-multiple-cursors'
+" seamless <C-hjkl> navigation between panels in vim and tmux
+  Plug 'christoomey/vim-tmux-navigator'
 " nyaovim plugins
   Plug 'rhysd/nyaovim-markdown-preview' , { 'for': 'markdown' }
 
@@ -63,8 +71,10 @@
 
 " Tag source
 " Plug 'tsukkee/unite-tag'
+
 " Ag wrapper (Unite grep alternative) search and edit
 " Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFToggle'] }
+
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " }}}
@@ -72,9 +82,11 @@
 " external tools integration plugins "{{{
 " ------------------------------------------------------------------------------
 
+" Asynchronous maker and linter (needs linters to work)
+  Plug 'benekastah/neomake', { 'on': ['Neomake'] }
+
 " git changes showed on line numbers
   Plug 'airblade/vim-gitgutter'
-
 
   Plug 'tpope/vim-fugitive'
 
@@ -92,20 +104,15 @@
 " misc "{{{
 " --------------------------------------------------------------------------
 
-" Asynchronous maker and linter (needs linters to work)
-  Plug 'benekastah/neomake', { 'on': ['Neomake'] }
-  Plug 'Shougo/deoplete.nvim'
-" Plug 'scrooloose/syntastic'
-  Plug 'terryma/vim-multiple-cursors'
 " Plug 'jiangmiao/auto-pairs'
   Plug 'tpope/vim-commentary'
   Plug 'pbrisbin/vim-mkdir'
-" Plug 'unusedPhD/scratch.vim'
 " Plug 'tpope/vim-unimpaired'
 " Plug 'tpope/vim-surround'
 " Plug 'SirVer/ultisnips'
-  Plug 'vim-scripts/vim-webdevicons'
+" Plug 'unusedPhD/scratch.vim'
   Plug 'unusedPhD/vim-simple-todo'
+  Plug 'vim-scripts/vim-webdevicons'
 
 " }}}
 
