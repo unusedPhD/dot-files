@@ -28,7 +28,6 @@
 " set nostartofline             " Prevent cursor from moving to beginning of line when switching buffers
 " set virtualedit=block         " To be able to select past EOL in visual block mode
 " set nojoinspaces              " No extra space when joining a line which ends with . ? !
-" set scrolloff=5               " Scroll when closing to top or bottom of the screen
 " set updatetime=1000           " Update time used to create swap file or other things
 " set expandtab
   set tabstop=4
@@ -37,9 +36,6 @@
 
 " Don't show current mode on last line (vim-airline does this instead)
   set noshowmode
-
-" set showmode                  " Always show mode
-" set showcmd                   " Show commands as you type them
 
 " Minimal number of screen lines to keep above and below the cursor
   set scrolloff=5

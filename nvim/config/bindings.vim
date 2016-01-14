@@ -1,13 +1,3 @@
-"  map     -> recursive key mapping
-"  noremap -> non-recursive key mapping
-"
-"   :map j gg
-"   :map Q j
-"   :noremap W j
-"
-"   j = gg
-"   Q = gg
-"   W = j
 
 " ==============================================================================
 " mapping settings "{{{
@@ -68,8 +58,8 @@
   vnoremap jf <esc>
 
 " visual mode, maintain > and < after shift
-  vmap < <gv
-  vmap > >gv
+  vnoremap < <gv
+  vnoremap > >gv
 
 " use tab for indenting in visual mode
   vnoremap <Tab> >gv|
@@ -84,6 +74,9 @@
 " better home/end
   nnoremap B ^
   nnoremap E $
+
+" make Y behave like D (yank from cursor to EOL)
+  nnoremap Y y$"
 
 " copy to clipboard
   vnoremap <C-c> "*y"
