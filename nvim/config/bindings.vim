@@ -1,13 +1,3 @@
-"  map     -> recursive key mapping
-"  noremap -> non-recursive key mapping
-"
-"   :map j gg
-"   :map Q j
-"   :noremap W j
-"
-"   j = gg
-"   Q = gg
-"   W = j
 
 " ==============================================================================
 " mapping settings "{{{
@@ -17,9 +7,9 @@
 " leader "{{{
 " ------------------------------------------------------------------------------
 
-let g:mapleader="\<space>"
+  let g:mapleader="\<space>"
 
-"}}}
+" }}}
 " -----------------------------------------------------
 " disable/remap arrow keys "{{{
 " -----------------------------------------------------
@@ -36,108 +26,114 @@ let g:mapleader="\<space>"
 " nnoremap <Left> <C-W>h
 " nnoremap <Right> <C-W>l
 
-"}}}
+" }}}
 " ------------------------------------------------------------------------------
 " splits "{{{
 " ------------------------------------------------------------------------------
 
-" create splits
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
+" horizontal split
+  noremap <Leader>h :<C-u>split<CR>
 
-"}}}
+" vertical split
+  noremap <Leader>v :<C-u>vsplit<CR>
+
+" }}}
 " ------------------------------------------------------------------------------
 " tabs "{{{
 " ------------------------------------------------------------------------------
 
 " normal mode tab navigation
-nnoremap <tab> gt
-nnoremap <s-tab> gT
+  nnoremap <tab> gt
+  nnoremap <s-tab> gT
 
-"}}}
+" }}}
 " ------------------------------------------------------------------------------
 " common tasks "{{{
 " ------------------------------------------------------------------------------
 
 " insert and visual mode escape
-inoremap fj <esc>
-inoremap jf <esc>
-vnoremap fj <esc>
-vnoremap jf <esc>
+  inoremap fj <esc>
+  inoremap jf <esc>
+  vnoremap fj <esc>
+  vnoremap jf <esc>
 
 " visual mode, maintain > and < after shift
-vmap < <gv
-vmap > >gv
+  vnoremap < <gv
+  vnoremap > >gv
 
 " use tab for indenting in visual mode
-vnoremap <Tab> >gv|
-vnoremap <S-Tab> <gv
-nnoremap > >>_
-nnoremap < <<_
+  vnoremap <Tab> >gv|
+  vnoremap <S-Tab> <gv
+  nnoremap > >>_
+  nnoremap < <<_
 
 " move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+  vnoremap J :m '>+1<CR>gv=gv
+  vnoremap K :m '<-2<CR>gv=gv
 
 " better home/end
-nnoremap B ^
-nnoremap E $
+  nnoremap B ^
+  nnoremap E $
+
+" make Y behave like D (yank from cursor to EOL)
+  nnoremap Y y$"
 
 " copy to clipboard
-vnoremap <C-c> "*y"
+  vnoremap <C-c> "*y"
 
-"}}}
+" }}}
 " ------------------------------------------------------------------------------
 " F-key actions "{{{
 " ------------------------------------------------------------------------------
 
 " toggle white characters visibility
-nnoremap <silent> <F2> :set list!<CR> :set list?<CR>
+  nnoremap <silent> <F2> :set list!<CR> :set list?<CR>
 " paste mode toggling
-set pastetoggle=<F3>
+  set pastetoggle=<F3>
 " clear search highlight
-nnoremap <silent> <F4> :noh<CR><CR>
+  nnoremap <silent> <F4> :noh<CR><CR>
 " source (reload configuration)
-nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
+  nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
 " terminal: exit insert mode
-"tnoremap <F12> <c-\><C-n>
+" tnoremap <F12> <c-\><C-n>
 
-"}}}
+" }}}
 " ------------------------------------------------------------------------------
 " Command abbreviations and mappings "{{{
 " ------------------------------------------------------------------------------
 
 " command mode save having to hit shift
-nnoremap ; :
+  nnoremap ; :
 
 " typo alias
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
+  cnoreabbrev W! w!
+  cnoreabbrev Q! q!
+  cnoreabbrev Qall! qall!
+  cnoreabbrev Wq wq
+  cnoreabbrev Wa wa
+  cnoreabbrev wQ wq
+  cnoreabbrev WQ wq
+  cnoreabbrev W w
+  cnoreabbrev Q q
+  cnoreabbrev Qall qall
 
 " Quiting and saving all
-cnoremap ww wqall
-cnoremap qq qall
-"
-"}}}
+  cnoremap ww wqall
+  cnoremap qq qall
+
+" }}}
 " ------------------------------------------------------------------------------
 " terminal "{{{
 " ------------------------------------------------------------------------------
 
-set shell=/bin/zsh
-" exit insert mode
-tnoremap <F12> <c-\><C-n>
+  set shell=/bin/zsh
 
-"}}}
+" exit insert mode
+  tnoremap <F12> <c-\><C-n>
+
+" }}}
 " ------------------------------------------------------------------------------
 
-"}}}
+" }}}
 
 " vim: foldmethod=marker
