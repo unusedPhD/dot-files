@@ -78,6 +78,10 @@
 " make Y behave like D (yank from cursor to EOL)
   nnoremap Y y$"
 
+" behave like arrows which search based on context of current command
+  cnoremap <c-n>  <down>
+  cnoremap <c-p>  <up>
+
 " copy to clipboard
   vnoremap <C-c> "*y"
 
