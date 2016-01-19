@@ -130,7 +130,7 @@
 " terminal "{{{
 " ------------------------------------------------------------------------------
 
-  set shell=/bin/zsh
+  set shell=/usr/bin/fish
 
 " exit insert mode
   tnoremap <F12> <c-\><C-n>

@@ -36,19 +36,25 @@
 
 " dir navigation
   Plug 'Shougo/vimfiler.vim'
+
 " ctag creation and display
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-easytags'
   Plug 'majutsushi/tagbar'
   Plug 'easymotion/vim-easymotion'
+
 " maintain state of fold, cursor position when re-opening files  
   Plug 'kopischke/vim-stay'
+
 " async autocomplete
   Plug 'Shougo/deoplete.nvim'
+
 " sublime-text like functionality
   Plug 'terryma/vim-multiple-cursors'
+
 " seamless <C-hjkl> navigation between panels in vim and tmux
   Plug 'christoomey/vim-tmux-navigator'
+
 " nyaovim plugins
   Plug 'rhysd/nyaovim-markdown-preview' , { 'for': 'markdown' }
 
@@ -102,7 +108,7 @@
 " }}}
 " ------------------------------------------------------------------------------
 " misc "{{{
-" --------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 
 " Plug 'jiangmiao/auto-pairs'
   Plug 'tpope/vim-commentary'
@@ -115,6 +121,7 @@
   Plug 'vim-scripts/vim-webdevicons'
 
 " }}}
+" ------------------------------------------------------------------------------
 
   call g:plug#end()
 
