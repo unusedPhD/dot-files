@@ -7,6 +7,10 @@
 " ------------------------------------------------------------------------------
 
   let g:go_fmt_command = "goimports"
+  
+" temporary workaround until issue #502 is fixed
+" disables gofmt on every save, so requires manual gofmt runs
+  let g:go_fmt_autosave = 0
 
 " }}}
 " ------------------------------------------------------------------------------

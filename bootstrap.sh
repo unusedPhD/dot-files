@@ -16,17 +16,17 @@ Usage: bootstrap.sh [ -a ][ -debftnvg ][ -vh ] \n
 
 while getopts ":adebftnvgvh" opt; do
 	case $opt in
-	   a)   ALL=true;;
-	   d)   DEPENDENCY=true;;
-	   e)   ENVIRO=true;;
-	   b)   BASH=true;;
-	   f)   FISH=true;;
-	   t)   TMUX=true;;
-	   n)   NEOVIM=true;;
-	   v)   VIM=true;;
-	   g)   GIT=true;;
-	   v)   echo "$VERSION"; exit 1;;
-	   h)   echo "$USAGE"; exit 1;;
+		a)   ALL=true;;
+		d)   DEPENDENCY=true;;
+		e)   ENVIRO=true;;
+		b)   BASH=true;;
+		f)   FISH=true;;
+		t)   TMUX=true;;
+		n)   NEOVIM=true;;
+		v)   VIM=true;;
+		g)   GIT=true;;
+		v)   echo "$VERSION"; exit 1;;
+		h)   echo "$USAGE"; exit 1;;
 	esac
 done
 
@@ -54,6 +54,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 		python-pip \
 		python3-dev \
 		python3-pip \
+		redshift \
 		shellcheck \
 		silversearcher-ag \
 		swig2.0 \
@@ -103,7 +104,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 	# add custom dir to $PATH
 	{
 		echo "export VISUAL=\"/usr/bin/vim\""
-		echo "export EDITOR=\"$VISUAL\""
+		echo "export EDITOR=\"\$VISUAL\""
 		echo "export LESSHISTFILE=\"/dev/null\""
 		echo "export XDG_CONFIG_HOME=\$HOME/.config"
 		echo "export XDG_DATA_HOME=\$HOME/.local/share"
@@ -142,23 +143,23 @@ if [ $ENVIRO ] || [ $ALL ]; then
 	cd ~/
 	mkdir bin
 	mkdir code
-	rm -r Desktop
-	mkdir desktop
-	rm -r Documents
-	mkdir documents
-	rm -r Downloads
-	mkdir downloads
-
+	mv Desktop desktop
+	mv Documents documents
+	mv Downloads downloads
+	rm -r Templates
+	rm -r Public
+	if [ -f ~/examples.desktop ]; then
+		rm examples.desktop
+	fi
 	# set caps lock to escape
 	{
-		echo "/usr/bin/setxkbmap -option 'caps:swapescape'" 
-		echo "setterm -regtabs 4"
+		echo "/usr/bin/setxkbmap -option 'caps:swapescape'"
 	} >> "$HOME"/.profile
 fi
 
 if [ $BASH ] || [ $ALL ]; then
 	rm ~/.bashrc
-	ln -s ~/code/dot-files/bashrc ~/.bashrc
+	ln -s ~/code/dot-files/bash/bashrc ~/.bashrc
 	pip install powerline-status
 fi
 
