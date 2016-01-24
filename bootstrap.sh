@@ -69,7 +69,10 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git
 	cd fzf
 	./install
-
+    mkdir ~/.config/fzf
+    mv ~/.fzf.bash ~/.config/fzf/bash
+    mv ~/.fzf.zsh ~/.config/fzf/zsh
+    
 	# BRO
 	cd "$HOME"/bin/src/
 	wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
@@ -151,8 +154,7 @@ if [ $ENVIRO ] || [ $ALL ]; then
 
 	# set caps lock to escape
 	{
-		echo "/usr/bin/setxkbmap -option 'caps:swapescape'" 
-		echo "setterm -regtabs 4"
+		echo "/usr/bin/setxkbmap -option 'caps:swapescape'"
 	} >> "$HOME"/.profile
 fi
 
