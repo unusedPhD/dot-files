@@ -15,7 +15,7 @@
 " Plug 'joshdick/onedark.vim'
   Plug 'vim-airline/vim-airline'
 " Plug 'joshdick/airline-onedark.vim'
-  Plug 'jszakmeister/vim-togglecursor'
+" Plug 'jszakmeister/vim-togglecursor'
 
 " }}}
 " ------------------------------------------------------------------------------

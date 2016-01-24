@@ -92,12 +92,16 @@
 
 " toggle white characters visibility
   nnoremap <silent> <F2> :set list!<CR> :set list?<CR>
+
 " paste mode toggling
   set pastetoggle=<F3>
+
 " clear search highlight
   nnoremap <silent> <F4> :noh<CR><CR>
+
 " source (reload configuration)
   nnoremap <silent> <F5> :source $HOME/.config/nvim/init.vim<CR>
+
 " terminal: exit insert mode
 " tnoremap <F12> <c-\><C-n>
 
