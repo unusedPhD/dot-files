@@ -15,7 +15,7 @@
 " Plug 'joshdick/onedark.vim'
   Plug 'vim-airline/vim-airline'
 " Plug 'joshdick/airline-onedark.vim'
-" Plug 'jszakmeister/vim-togglecursor'
+  Plug 'jszakmeister/vim-togglecursor'
 
 " }}}
 " ------------------------------------------------------------------------------
@@ -43,11 +43,11 @@
   Plug 'majutsushi/tagbar'
   Plug 'easymotion/vim-easymotion'
 
-" maintain state of fold, cursor position when re-opening files  
+" maintain state of fold, cursor position when re-opening files
   Plug 'kopischke/vim-stay'
 
 " async autocomplete
-  Plug 'Shougo/deoplete.nvim'
+" Plug 'Shougo/deoplete.nvim'
 
 " sublime-text like functionality
   Plug 'terryma/vim-multiple-cursors'
