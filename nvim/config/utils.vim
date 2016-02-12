@@ -37,32 +37,32 @@
 
   augroup linters
 
-      " npm install -g eslint
+    " npm install -g eslint
       if executable('eslint')
           autocmd BufWritePost *.js Neomake eslint
       endif
 
-      " gem install rubocop
+    " gem install rubocop
       if executable('rubocop')
           autocmd BufWritePost *.rb Neomake rubocop
       endif
 
-      " apt-get install tidy
+    " apt-get install tidy
       if executable('tidy')
           autocmd BufWritePost *.html Neomake tidy
       endif
 
-      " apt-get install shellcheck
+    " apt-get install shellcheck
       if executable('shellcheck')
           autocmd BufWritePost *.sh Neomake shellcheck
       endif
 
-      " pip3 install vim-vint
+    " pip3 install vim-vint
       if executable('vint')
           autocmd BufWritePost *.vim Neomake vint
       endif
 
-      " go get -u github.com/golang/lint/golint
+    " go get -u github.com/golang/lint/golint
       if executable('golint')
           autocmd BufWritePost *.go Neomake golint
       endif
@@ -76,13 +76,13 @@
 
   autocmd vimrc BufWritePre *.{go,pm,pl,py,js} :call <SID>StripTrailingWhitespaces()
   function! <SID>StripTrailingWhitespaces()
-      " save last search, and cursor position
+    " save last search, and cursor position
       let l:_s=@/
       let l:l = line('.')
       let l:c = col('.')
-      " strip whitespace
+    " strip whitespace
       %s/\s\+$//e
-      " restore previous search history, and cursor position
+    " restore previous search history, and cursor position
       let @/=l:_s
       call cursor(l:l, l:c)
   endfunction

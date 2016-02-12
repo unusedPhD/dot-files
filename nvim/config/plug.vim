@@ -52,6 +52,9 @@
 " sublime-text like functionality
   Plug 'terryma/vim-multiple-cursors'
 
+" align around character
+  Plug 'junegunn/vim-easy-align'
+
 " seamless <C-hjkl> navigation between panels in vim and tmux
   Plug 'christoomey/vim-tmux-navigator'
 
