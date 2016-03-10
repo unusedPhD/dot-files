@@ -517,6 +517,12 @@ function netinfo() { # netinfo - shows network information for your system
     /sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
     echo "---------------------------------------------------"
 }
+
+function crontab () { # disable crontab -r
+    # Replace -r with -e
+    /usr/bin/crontab "${@/-r/-e}"
+}
+
 #}}}
 ################################################################################
 # random #{{{
