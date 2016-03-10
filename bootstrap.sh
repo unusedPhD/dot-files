@@ -73,7 +73,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
     mkdir ~/.config/fzf
     mv ~/.fzf.bash ~/.config/fzf/bash
     mv ~/.fzf.zsh ~/.config/fzf/zsh
-    
+
 	# BRO
 	cd "$HOME"/bin/src/
 	wget https://www.bro.org/downloads/release/bro-2.4.1.tar.gz
@@ -98,6 +98,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 	wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz
 	tar xvzf node-v4.2.4-linux-x64.tar.gz
 	mv node-v4.2.4-linux-x64 "$HOME"/bin/node
+	ln -s ~/code/dot-files/npm ~/.config/npm
 
 	# JQ
 	wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64

@@ -107,7 +107,7 @@
 
 " }}}
 " ------------------------------------------------------------------------------
-" Command abbreviations and mappings "{{{
+" command abbreviations and mappings "{{{
 " ------------------------------------------------------------------------------
 
 " command mode save having to hit shift
