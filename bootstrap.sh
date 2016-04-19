@@ -54,7 +54,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 		python-pip \
 		python3-dev \
 		python3-pip \
-		redshift \
+		redshift-gtk \
 		shellcheck \
 		silversearcher-ag \
 		swig2.0 \
@@ -70,9 +70,9 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git
 	cd fzf
 	./install
-    mkdir ~/.config/fzf
-    mv ~/.fzf.bash ~/.config/fzf/bash
-    mv ~/.fzf.zsh ~/.config/fzf/zsh
+	mkdir ~/.config/fzf
+	mv ~/.fzf.bash ~/.config/fzf/bash
+	mv ~/.fzf.zsh ~/.config/fzf/zsh
 
 	# BRO
 	cd "$HOME"/bin/src/
@@ -103,7 +103,7 @@ if [ $DEPENDENCY ] || [ $ALL ]; then
 	# JQ
 	wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
 	chmod +x jq-linux64
-	sudo mv jq-linux64 /usr/local/bin/
+	sudo mv jq-linux64 /usr/local/bin/jq
 
 	# add custom dir to $PATH
 	{
@@ -150,15 +150,18 @@ if [ $ENVIRO ] || [ $ALL ]; then
 	mv Desktop desktop
 	mv Documents documents
 	mv Downloads downloads
+	mv Music music
+	mv Pictures pictures
+	mv Videos video
 	rm -r Templates
 	rm -r Public
 	if [ -f ~/examples.desktop ]; then
 		rm examples.desktop
 	fi
 	# set caps lock to escape
-	{
-		echo "/usr/bin/setxkbmap -option 'caps:swapescape'"
-	} >> "$HOME"/.profile
+	#{
+	#	echo "/usr/bin/setxkbmap -option 'caps:swapescape'"
+	#} >> "$HOME"/.profile
 fi
 
 if [ $BASH ] || [ $ALL ]; then
@@ -178,8 +181,8 @@ if [ $FISH ] || [ $ALL ]; then
 	ln -s ~/code/dot-files/fish/init.fish ~/.config/omf/
 	curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
 	echo "launch fish, and run:
+		omf install bang-bang
 		omf install bobthefish
-		omf theme bobthefish
 		omf install extract
 		omf install weather
 		omf install fzf"
@@ -187,12 +190,12 @@ fi
 
 if [ $TMUX ] || [ $ALL ]; then
 	sudo apt-get install tmux
-	ln -s ~/code/dot-files/tmux.conf ~/.tmux.conf
+	ln -s ~/code/dot-files/tmux/tmux.conf ~/.tmux.conf
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	# install plugins on first launch of tmux --> <C-a> I
 	echo "alias tmux='tmux -2'" >> ~/.bash_aliases
 	# add to local alias if using fish shell
-	if [ -e ~/.config/fish/alias.fish ]; then
+	if [ -d ~/.config/fish/ ]; then
 		echo "alias tmux 'tmux -2'" >> ~/.config/fish/alias_local.fish
 	fi
 fi
