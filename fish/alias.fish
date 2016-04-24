@@ -1,11 +1,3 @@
-# dir navigation
-alias ..   "cd ../"
-alias 2.   "cd ../"
-alias ...  "cd ../../"
-alias 3.   "cd ../../"
-alias .... "cd ../../../"
-alias 4.   "cd ../../../"
-
 # ls
 alias l  "ls -1"
 alias ll "ls -hal"
