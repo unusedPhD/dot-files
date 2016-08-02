@@ -41,7 +41,7 @@
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-easytags'
   Plug 'majutsushi/tagbar'
-  Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 
 " maintain state of fold, cursor position when re-opening files
   Plug 'kopischke/vim-stay'
@@ -59,7 +59,7 @@
   Plug 'christoomey/vim-tmux-navigator'
 
 " nyaovim plugins
-  Plug 'rhysd/nyaovim-markdown-preview' , { 'for': 'markdown' }
+" Plug 'rhysd/nyaovim-markdown-preview' , { 'for': 'markdown' }
 
 " }}}
 " ------------------------------------------------------------------------------
@@ -100,7 +100,7 @@
   Plug 'tpope/vim-fugitive'
 
 " git log viewer (Gitv! for file mode)
-  Plug 'gregsexton/gitv'
+" Plug 'gregsexton/gitv'
 
 " neovim terminal improving
 " Plug 'kassio/neoterm', { 'on': 'T' }

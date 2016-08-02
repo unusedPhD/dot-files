@@ -3,7 +3,6 @@ nbproject
 *~
 *.rbc
 *.pyc
-*.log
 *.db
 *.sqlite3
 *.bak
@@ -41,6 +40,5 @@ setuptools-*
 .rvmrc*
 .rbenv-version
 .ruby-version
-log/*.log
 tmp/**/*
 Procfile.simon
