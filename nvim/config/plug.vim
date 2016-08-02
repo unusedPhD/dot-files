@@ -15,7 +15,7 @@
 " Plug 'joshdick/onedark.vim'
   Plug 'vim-airline/vim-airline'
 " Plug 'joshdick/airline-onedark.vim'
-  Plug 'jszakmeister/vim-togglecursor'
+" Plug 'jszakmeister/vim-togglecursor'
 
 " }}}
 " ------------------------------------------------------------------------------
@@ -38,9 +38,9 @@
   Plug 'Shougo/vimfiler.vim'
 
 " ctag creation and display
-  Plug 'xolox/vim-misc'
-  Plug 'xolox/vim-easytags'
-  Plug 'majutsushi/tagbar'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-easytags'
+" Plug 'majutsushi/tagbar'
 " Plug 'easymotion/vim-easymotion'
 
 " maintain state of fold, cursor position when re-opening files
@@ -53,7 +53,7 @@
   Plug 'terryma/vim-multiple-cursors'
 
 " align around character
-  Plug 'junegunn/vim-easy-align'
+" Plug 'junegunn/vim-easy-align'
 
 " seamless <C-hjkl> navigation between panels in vim and tmux
   Plug 'christoomey/vim-tmux-navigator'
