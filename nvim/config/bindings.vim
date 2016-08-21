@@ -52,10 +52,10 @@
 " ------------------------------------------------------------------------------
 
 " insert and visual mode escape
-  inoremap fj <esc>
-  inoremap jf <esc>
-  vnoremap fj <esc>
-  vnoremap jf <esc>
+" inoremap fj <esc>
+" inoremap jf <esc>
+" vnoremap fj <esc>
+" vnoremap jf <esc>
 
 " visual mode, maintain > and < after shift
   vnoremap < <gv
