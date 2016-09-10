@@ -249,4 +249,7 @@ fi
 #    palette: Tango
 # if installing byobu, ~/.byobu can be moved to ~/.config/byobu/
 # if installing zsh, echo 'export ZDOTDIR="$HOME/.config/zsh"' > /etc/zsh/zshenv
-
+#
+# put the following line of code into my .xprofile file in my home directory.
+#  setxkbmap -option 'caps:ctrl_modifier' && xcape -e 'Caps_Lock=Escape' &
+#  xcape -e '#66=Escape'
