@@ -47,7 +47,7 @@
   Plug 'kopischke/vim-stay'
 
 " async autocomplete
-" Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim'
 
 " sublime-text like functionality
   Plug 'terryma/vim-multiple-cursors'
