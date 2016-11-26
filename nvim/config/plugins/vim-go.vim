@@ -25,7 +25,7 @@
 " in a new vertical, horizontal, or tab, for the word under your cursor:
   au FileType go nmap <Leader>ds <Plug>(go-def-split)
   au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-" au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+  au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 " open the relevant Godoc for the word under the cursor with <leader>gd or 
 " open it vertically with <leader>gv
