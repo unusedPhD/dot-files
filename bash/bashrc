@@ -92,7 +92,7 @@ else
     # add a line of "---" and the time between each command, recalculated every time the prompt is shown in function prompt_command
     fill="--- "
 
-    PS1="\[$NC\]\[$Grey\]"'$fill \t\n'"\[$BIPurple\]\h \[$BIBlue\]\w\[$NC\] \$ "
+    PS1="\[$BIPurple\]\h \[$BIBlue\]\w\[$NC\] \$ "
 
     # Reset color for command output, invoked every time before a command is executed
     trap 'echo -ne "\033[0m"' DEBUG
@@ -551,17 +551,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # source file with all bash alias
-if [ -f ~/.bashrc.alias ]; then
-    . ~/.bashrc.alias
-fi
-
-# source file for local bashrc
-if [ -f ~/.bashrc.local ]; then
-    . ~/.bashrc.local
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 # load fzf keybindings
 [ -f ~/.config/fzf/bash ] && source ~/.config/fzf/bash
 #}}}
 ################################################################################
-

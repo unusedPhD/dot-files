@@ -5,7 +5,7 @@
 
   colorscheme gruvbox
   set background=dark
-  let g:airline_theme = 'gruvbox'
+" let g:airline_theme = 'gruvbox'
   if (&term =~? 'xterm') || (&term =~? 'screen')
       set t_Co=256
   endif

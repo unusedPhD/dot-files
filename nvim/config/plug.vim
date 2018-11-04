@@ -13,7 +13,7 @@
   Plug 'morhetz/gruvbox'
 " Plug 'sickill/vim-monokai'
 " Plug 'joshdick/onedark.vim'
-  Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 " Plug 'joshdick/airline-onedark.vim'
 " Plug 'jszakmeister/vim-togglecursor'
 
@@ -26,8 +26,6 @@
   Plug 'fatih/vim-go', { 'for': 'go' }
   Plug 'mephux/bro.vim', { 'for': 'bro' }
   Plug 'yaunj/vim-yara', { 'for': 'yara' }
-  Plug 'dag/vim-fish', { 'for': 'fish' }
-" Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
 " }}}
 " ------------------------------------------------------------------------------
