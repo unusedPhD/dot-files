@@ -134,7 +134,7 @@
 " terminal "{{{
 " ------------------------------------------------------------------------------
 
-  set shell=/usr/bin/fish
+" set shell=/usr/bin/fish
 
 " exit insert mode
   tnoremap <F12> <c-\><C-n>
